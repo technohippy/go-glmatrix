@@ -1,0 +1,1 @@
+go-glmatrix is a golang version of [glMatrix](http://glmatrix.net/)
