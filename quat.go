@@ -6,17 +6,17 @@ import (
 	"math/rand"
 )
 
-// NewQuat .
+// NewQuat creates a new identity quat
 func NewQuat() []float64 {
 	return []float64{0., 0., 0., 1.}
 }
 
-// QuatCreate .
+// QuatCreate creates a new identity quat
 func QuatCreate() []float64 {
 	return NewQuat()
 }
 
-// QuatIdentity .
+// QuatIdentity set a quat to the identity quaternion
 func QuatIdentity(out []float64) []float64 {
 	out[0] = 0.
 	out[1] = 0.
@@ -25,7 +25,8 @@ func QuatIdentity(out []float64) []float64 {
 	return out
 }
 
-// QuatSetAxisAngle .
+// QuatSetAxisAngle sets a quat from the given angle and rotation axis,
+// then returns it.
 func QuatSetAxisAngle(out, axis []float64, rad float64) []float64 {
 	rad *= 0.5
 	s := math.Sin(rad)
@@ -36,7 +37,15 @@ func QuatSetAxisAngle(out, axis []float64, rad float64) []float64 {
 	return out
 }
 
-// QuatGetAxisAngle .
+// QuatGetAxisAngle gets the rotation axis and angle for a given
+// quaternion. If a quaternion is created with
+// setAxisAngle, this method will return the same
+// values as providied in the original parameter list
+// OR functionally equivalent values.
+//
+// Example: The quaternion formed by axis [0, 0, 1] and
+//  angle -90 is the same as the quaternion formed by
+//  [0, 0, 1] and 270. This method favors the latter.
 func QuatGetAxisAngle(out, q []float64) float64 {
 	rad := math.Acos(q[3]) * 2.
 	s := math.Sin(rad / 2.)
@@ -52,13 +61,13 @@ func QuatGetAxisAngle(out, q []float64) float64 {
 	return rad
 }
 
-// QuatGetAngle .
+// QuatGetAngle gets the angular distance between two unit quaternions
 func QuatGetAngle(a, b []float64) float64 {
 	dotproduct := QuatDot(a, b)
 	return math.Acos(2*dotproduct*dotproduct - 1)
 }
 
-// QuatMultiply .
+// QuatMultiply multiplies two quat's
 func QuatMultiply(out, a, b []float64) []float64 {
 	ax := a[0]
 	ay := a[1]
@@ -75,7 +84,7 @@ func QuatMultiply(out, a, b []float64) []float64 {
 	return out
 }
 
-// QuatRotateX .
+// QuatRotateX rotates a quaternion by the given angle about the X axis
 func QuatRotateX(out, a []float64, rad float64) []float64 {
 	rad *= 0.5
 	ax := a[0]
@@ -92,7 +101,7 @@ func QuatRotateX(out, a []float64, rad float64) []float64 {
 	return out
 }
 
-// QuatRotateY .
+// QuatRotateY rotates a quaternion by the given angle about the Y axis
 func QuatRotateY(out, a []float64, rad float64) []float64 {
 	rad *= 0.5
 	ax := a[0]
@@ -109,7 +118,7 @@ func QuatRotateY(out, a []float64, rad float64) []float64 {
 	return out
 }
 
-// QuatRotateZ .
+// QuatRotateZ rotates a quaternion by the given angle about the Z axis
 func QuatRotateZ(out, a []float64, rad float64) []float64 {
 	rad *= 0.5
 	ax := a[0]
@@ -126,7 +135,9 @@ func QuatRotateZ(out, a []float64, rad float64) []float64 {
 	return out
 }
 
-// QuatCalculateW .
+// QuatCalculateW calculates the W component of a quat from the X, Y, and Z components.
+// Assumes that quaternion is 1 unit in length.
+// Any existing W component will be ignored.
 func QuatCalculateW(out, a []float64) []float64 {
 	x := a[0]
 	y := a[1]
@@ -138,7 +149,7 @@ func QuatCalculateW(out, a []float64) []float64 {
 	return out
 }
 
-// QuatExp .
+// QuatExp calculate the exponential of a unit quaternion.
 func QuatExp(out, a []float64) []float64 {
 	x := a[0]
 	y := a[1]
@@ -157,7 +168,7 @@ func QuatExp(out, a []float64) []float64 {
 	return out
 }
 
-// QuatLn .
+// QuatLn calculate the natural logarithm of a unit quaternion.
 func QuatLn(out, a []float64) []float64 {
 	x := a[0]
 	y := a[1]
@@ -175,7 +186,7 @@ func QuatLn(out, a []float64) []float64 {
 	return out
 }
 
-// QuatPow .
+// QuatPow calculate the scalar power of a unit quaternion.
 func QuatPow(out, a []float64, b float64) []float64 {
 	QuatLn(out, a)
 	QuatScale(out, out, b)
@@ -183,7 +194,7 @@ func QuatPow(out, a []float64, b float64) []float64 {
 	return out
 }
 
-// QuatSlerp .
+// QuatSlerp performs a spherical linear interpolation between two quat
 func QuatSlerp(out, a, b []float64, t float64) []float64 {
 	ax := a[0]
 	ay := a[1]
@@ -220,7 +231,7 @@ func QuatSlerp(out, a, b []float64, t float64) []float64 {
 	return out
 }
 
-// QuatRandom .
+// QuatRandom generates a random unit quaternion
 func QuatRandom(out []float64) []float64 {
 	u1 := rand.Float64()
 	u2 := rand.Float64()
@@ -234,7 +245,7 @@ func QuatRandom(out []float64) []float64 {
 	return out
 }
 
-// QuatInvert .
+// QuatInvert calculates the inverse of a quat
 func QuatInvert(out, a []float64) []float64 {
 	a0 := a[0]
 	a1 := a[1]
@@ -252,7 +263,8 @@ func QuatInvert(out, a []float64) []float64 {
 	return out
 }
 
-// QuatConjugate .
+// QuatConjugate calculates the conjugate of a quat
+// If the quaternion is normalized, this function is faster than quat.inverse and produces the same result.
 func QuatConjugate(out, a []float64) []float64 {
 	out[0] = -a[0]
 	out[1] = -a[1]
@@ -261,7 +273,10 @@ func QuatConjugate(out, a []float64) []float64 {
 	return out
 }
 
-// QuatFromMat3 .
+// QuatFromMat3 creates a quaternion from the given 3x3 rotation matrix.
+//
+// NOTE: The resultant quaternion is not normalized, so you should be sure
+// to renormalize the quaternion yourself where necessary.
 func QuatFromMat3(out, m []float64) []float64 {
 	fTrace := m[0] + m[4] + m[8]
 	if fTrace > 0. {
@@ -291,7 +306,7 @@ func QuatFromMat3(out, m []float64) []float64 {
 	return out
 }
 
-// QuatFromEuler .
+// QuatFromEuler creates a quaternion from the given euler angle x, y, z.
 func QuatFromEuler(out []float64, x, y, z float64) []float64 {
 	halfToRad := (0.5 * math.Pi) / 180.
 	x *= halfToRad
@@ -310,57 +325,60 @@ func QuatFromEuler(out []float64, x, y, z float64) []float64 {
 	return out
 }
 
-// QuatStr .
+// QuatStr returns a string representation of a quatenion
 func QuatStr(a []float64) string {
 	return fmt.Sprintf("quat(%v, %v, %v, %v)", a[0], a[1], a[2], a[3])
 }
 
-// QuatClone .
+// QuatClone creates a new quat initialized with values from an existing quaternion
 var QuatClone = Vec4Clone
 
-// QuatFromValues .
+// QuatFromValues creates a new quat initialized with the given values
 var QuatFromValues = Vec4FromValues
 
-// QuatCopy .
+// QuatCopy copy the values from one quat to another
 var QuatCopy = Vec4Copy
 
-// QuatSet .
+// QuatSet set the components of a quat to the given values
 var QuatSet = Vec4Set
 
-// QuatAdd .
+// QuatAdd adds two quat's
 var QuatAdd = Vec4Add
 
-// QuatMul .
+// QuatMul alias QuatMultiply
 var QuatMul = QuatMultiply
 
-// QuatScale .
+// QuatScale scales a quat by a scalar number
 var QuatScale = Vec4Scale
 
-// QuatDot .
+// QuatDot calculates the dot product of two quat's
 var QuatDot = Vec4Dot
 
-// QuatLerp .
+// QuatLerp performs a linear interpolation between two quat's
 var QuatLerp = Vec4Lerp
 
-// QuatLength .
+// QuatLength calculates the length of a quat
 var QuatLength = Vec4Length
 
-// QuatLen .
+// QuatLen alias for QuatLength
 var QuatLen = QuatLength
 
-// QuatSquaredLength .
+// QuatSquaredLength calculates the squared length of a quat
 var QuatSquaredLength = Vec4SquaredLength
 
-// QuatNormalize .
+// QuatNormalize mormalize a quat
 var QuatNormalize = Vec4Normalize
 
-// QuatExactEquals .
+// QuatExactEquals returns whether or not the quaternions have exactly the same elements in the same position (when compared with ===)
 var QuatExactEquals = Vec4ExactEquals
 
-// QuatEquals .
+// QuatEquals returns whether or not the quaternions have approximately the same elements in the same position.
 var QuatEquals = Vec4Equals
 
-// QuatRotationTo .
+// QuatRotationTo sets a quaternion to represent the shortest rotation from one
+// vector to another.
+//
+// Both vectors are assumed to be unit length.
 func QuatRotationTo(out, a, b []float64) []float64 {
 	tmpvec3 := Vec3Create()
 	xUnitVec3 := Vec3FromValues(1., 0., 0.)
@@ -390,7 +408,7 @@ func QuatRotationTo(out, a, b []float64) []float64 {
 	}
 }
 
-// QuatSqlerp .
+// QuatSqlerp performs a spherical linear interpolation with two control points
 var QuatSqlerp = (func() func(out, a, b, c, d []float64, t float64) []float64 {
 	temp1 := QuatCreate()
 	temp2 := QuatCreate()
@@ -403,7 +421,9 @@ var QuatSqlerp = (func() func(out, a, b, c, d []float64, t float64) []float64 {
 	}
 })()
 
-// QuatSetAxes .
+// QuatSetAxes sets the specified quaternion with values corresponding to the given
+// axes. Each axis is a vec3 and is expected to be unit length and
+// perpendicular to all other specified axes.
 var QuatSetAxes = (func() func(out, view, right, up []float64) []float64 {
 	matr := Mat3Create()
 	return func(out, view, right, up []float64) []float64 {
