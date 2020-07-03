@@ -1,16 +1,28 @@
-go-glmatrix is a golang version of [glMatrix](http://glmatrix.net/)
+# go-glmatrix
+
+go-glmatrix is a golang version of [glMatrix](http://glmatrix.net/), which is ``designed to perform vector and matrix operations stupidly fast''.
+
+# Usage
 
 ```go
 package main
 
 import (
 	"fmt"
-	ggm "github.com/technohippy/go-glmatrix"
+	glm "github.com/technohippy/go-glmatrix"
 )
 
 func main() {
-	perspective := ggm.Mat4Create()
-	ggm.Mat4Perspective(perspective, ggm.ToRadian(45), 640./480, 0.1, 200.)
-	fmt.Println(ggm.Mat4Str(perspective))
+	pers := glm.Mat4Create() // pers is just a slice ([]float64)
+	glm.Mat4Perspective(pers, glm.ToRadian(45), 640./480, 0.1, 200.)
+	fmt.Println(glm.Mat4Str(pers))
 }
 ```
+
+# Document
+
+See [the documentation for glMatrix](http://glmatrix.net/docs/)
+
+# License
+
+MIT
