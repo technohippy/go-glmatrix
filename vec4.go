@@ -6,27 +6,27 @@ import (
 	"math/rand"
 )
 
-// NewVec4 .
+// NewVec4 creates a new, empty  Vec4
 func NewVec4() []float64 {
 	return []float64{0., 0., 0., 0.}
 }
 
-// Vec4Create .
+// Vec4Create creates a new  Vec4 initialized with values from an existing vector
 func Vec4Create() []float64 {
 	return NewVec4()
 }
 
-// Vec4Clone .
+// Vec4Clone creates a new  Vec4 initialized with the given values
 func Vec4Clone(a []float64) []float64 {
 	return []float64{a[0], a[1], a[2], a[3]}
 }
 
-// Vec4FromValues .
+// Vec4FromValues creates a new  Vec4 initialized with the given values
 func Vec4FromValues(x, y, z, w float64) []float64 {
 	return []float64{x, y, z, w}
 }
 
-// Vec4Copy .
+// Vec4Copy copy the values from one  Vec4 to another
 func Vec4Copy(out, a []float64) []float64 {
 	out[0] = a[0]
 	out[1] = a[1]
@@ -35,7 +35,7 @@ func Vec4Copy(out, a []float64) []float64 {
 	return out
 }
 
-// Vec4Set .
+// Vec4Set set the components of a vec4 to the given values
 func Vec4Set(out []float64, x, y, z, w float64) []float64 {
 	out[0] = x
 	out[1] = y
@@ -44,7 +44,7 @@ func Vec4Set(out []float64, x, y, z, w float64) []float64 {
 	return out
 }
 
-// Vec4Add .
+// Vec4Add adds two  Vec4's
 func Vec4Add(out, a, b []float64) []float64 {
 	out[0] = a[0] + b[0]
 	out[1] = a[1] + b[1]
@@ -53,7 +53,7 @@ func Vec4Add(out, a, b []float64) []float64 {
 	return out
 }
 
-// Vec4Subtract .
+// Vec4Subtract subtracts vector b from vector a
 func Vec4Subtract(out, a, b []float64) []float64 {
 	out[0] = a[0] - b[0]
 	out[1] = a[1] - b[1]
@@ -62,7 +62,7 @@ func Vec4Subtract(out, a, b []float64) []float64 {
 	return out
 }
 
-// Vec4Multiply .
+// Vec4Multiply multiplies two  Vec4's
 func Vec4Multiply(out, a, b []float64) []float64 {
 	out[0] = a[0] * b[0]
 	out[1] = a[1] * b[1]
@@ -71,7 +71,7 @@ func Vec4Multiply(out, a, b []float64) []float64 {
 	return out
 }
 
-// Vec4Divide .
+// Vec4Divide divides two  Vec4's
 func Vec4Divide(out, a, b []float64) []float64 {
 	out[0] = a[0] / b[0]
 	out[1] = a[1] / b[1]
@@ -80,7 +80,7 @@ func Vec4Divide(out, a, b []float64) []float64 {
 	return out
 }
 
-// Vec4Ceil .
+// Vec4Ceil math.ceil the components of a vec4
 func Vec4Ceil(out, a []float64) []float64 {
 	out[0] = math.Ceil(a[0])
 	out[1] = math.Ceil(a[1])
@@ -89,7 +89,7 @@ func Vec4Ceil(out, a []float64) []float64 {
 	return out
 }
 
-// Vec4Floor .
+// Vec4Floor math.floor the components of a vec4
 func Vec4Floor(out, a []float64) []float64 {
 	out[0] = math.Floor(a[0])
 	out[1] = math.Floor(a[1])
@@ -98,7 +98,7 @@ func Vec4Floor(out, a []float64) []float64 {
 	return out
 }
 
-// Vec4Min .
+// Vec4Min returns the minimum of two  Vec4's
 func Vec4Min(out, a, b []float64) []float64 {
 	out[0] = math.Min(a[0], b[0])
 	out[1] = math.Min(a[1], b[1])
@@ -107,7 +107,7 @@ func Vec4Min(out, a, b []float64) []float64 {
 	return out
 }
 
-// Vec4Max .
+// Vec4Max returns the maximum of two  Vec4's
 func Vec4Max(out, a, b []float64) []float64 {
 	out[0] = math.Max(a[0], b[0])
 	out[1] = math.Max(a[1], b[1])
@@ -116,7 +116,7 @@ func Vec4Max(out, a, b []float64) []float64 {
 	return out
 }
 
-// Vec4Round .
+// Vec4Round math.round the components of a vec4
 func Vec4Round(out, a []float64) []float64 {
 	out[0] = math.Round(a[0])
 	out[1] = math.Round(a[1])
@@ -125,7 +125,7 @@ func Vec4Round(out, a []float64) []float64 {
 	return out
 }
 
-// Vec4Scale .
+// Vec4Scale scales a vec4 by a scalar number
 func Vec4Scale(out, a []float64, scale float64) []float64 {
 	out[0] = a[0] * scale
 	out[1] = a[1] * scale
@@ -134,7 +134,7 @@ func Vec4Scale(out, a []float64, scale float64) []float64 {
 	return out
 }
 
-// Vec4ScaleAndAdd .
+// Vec4ScaleAndAdd adds two  Vec4's after scaling the second operand by a scalar value
 func Vec4ScaleAndAdd(out, a, b []float64, scale float64) []float64 {
 	out[0] = a[0] + b[0]*scale
 	out[1] = a[1] + b[1]*scale
@@ -143,7 +143,7 @@ func Vec4ScaleAndAdd(out, a, b []float64, scale float64) []float64 {
 	return out
 }
 
-// Vec4Distance .
+// Vec4Distance calculates the euclidian distance between two  Vec4's
 func Vec4Distance(a, b []float64) float64 {
 	x := b[0] - a[0]
 	y := b[1] - a[1]
@@ -152,7 +152,7 @@ func Vec4Distance(a, b []float64) float64 {
 	return hypot(x, y, z, w)
 }
 
-// Vec4SquaredDistance .
+// Vec4SquaredDistance calculates the squared euclidian distance between two  Vec4's
 func Vec4SquaredDistance(a, b []float64) float64 {
 	x := b[0] - a[0]
 	y := b[1] - a[1]
@@ -161,7 +161,7 @@ func Vec4SquaredDistance(a, b []float64) float64 {
 	return x*x + y*y + z*z + w*w
 }
 
-// Vec4Length .
+// Vec4Length calculates the length of a vec4
 func Vec4Length(out []float64) float64 {
 	x := out[0]
 	y := out[1]
@@ -170,7 +170,7 @@ func Vec4Length(out []float64) float64 {
 	return hypot(x, y, z, w)
 }
 
-// Vec4SquaredLength .
+// Vec4SquaredLength calculates the squared length of a vec4
 func Vec4SquaredLength(out []float64) float64 {
 	x := out[0]
 	y := out[1]
@@ -179,7 +179,7 @@ func Vec4SquaredLength(out []float64) float64 {
 	return x*x + y*y + z*z + w*w
 }
 
-// Vec4Negate .
+// Vec4Negate negates the components of a vec4
 func Vec4Negate(out, a []float64) []float64 {
 	out[0] = -a[0]
 	out[1] = -a[1]
@@ -188,7 +188,7 @@ func Vec4Negate(out, a []float64) []float64 {
 	return out
 }
 
-// Vec4Inverse .
+// Vec4Inverse returns the inverse of the components of a vec4
 func Vec4Inverse(out, a []float64) []float64 {
 	out[0] = 1. / a[0]
 	out[1] = 1. / a[1]
@@ -197,7 +197,7 @@ func Vec4Inverse(out, a []float64) []float64 {
 	return out
 }
 
-// Vec4Normalize .
+// Vec4Normalize normalize a vec4
 func Vec4Normalize(out, a []float64) []float64 {
 	len := Vec4Length(a)
 	if 0 < len {
@@ -210,12 +210,12 @@ func Vec4Normalize(out, a []float64) []float64 {
 	return out
 }
 
-// Vec4Dot .
+// Vec4Dot calculates the dot product of two  Vec4's
 func Vec4Dot(a, b []float64) float64 {
 	return a[0]*b[0] + a[1]*b[1] + a[2]*b[2] + a[3]*b[3]
 }
 
-// Vec4Cross .
+// Vec4Cross computes the cross product of two  Vec4's
 func Vec4Cross(out, u, v, w []float64) []float64 {
 	A := v[0]*w[1] - v[1]*w[0]
 	B := v[0]*w[2] - v[2]*w[0]
@@ -236,7 +236,7 @@ func Vec4Cross(out, u, v, w []float64) []float64 {
 	return out
 }
 
-// Vec4Lerp .
+// Vec4Lerp performs a linear interpolation between two  Vec4's
 func Vec4Lerp(out, a, b []float64, t float64) []float64 {
 	ax := a[0]
 	ay := a[1]
@@ -249,7 +249,7 @@ func Vec4Lerp(out, a, b []float64, t float64) []float64 {
 	return out
 }
 
-// Vec4Random .
+// Vec4Random generates a random vector with the given scale
 func Vec4Random(out []float64, scale float64) []float64 {
 	if scale == 0. {
 		scale = 1.
@@ -281,7 +281,7 @@ func Vec4Random(out []float64, scale float64) []float64 {
 	return out
 }
 
-// Vec4TransformMat4 .
+// Vec4TransformMat4 transforms the vec4 with a mat4
 func Vec4TransformMat4(out, a, m []float64) []float64 {
 	x := a[0]
 	y := a[1]
@@ -294,7 +294,7 @@ func Vec4TransformMat4(out, a, m []float64) []float64 {
 	return out
 }
 
-// Vec4TransformQuat .
+// Vec4TransformQuat transforms the vec4 with a quat
 func Vec4TransformQuat(out, a, q []float64) []float64 {
 	qx := q[0]
 	qy := q[1]
@@ -315,7 +315,7 @@ func Vec4TransformQuat(out, a, q []float64) []float64 {
 	return out
 }
 
-// Vec4Zero .
+// Vec4Zero set the components of a vec4 to zero
 func Vec4Zero(out []float64) []float64 {
 	out[0] = 0.
 	out[1] = 0.
@@ -324,43 +324,43 @@ func Vec4Zero(out []float64) []float64 {
 	return out
 }
 
-// Vec4Str .
+// Vec4Str returns a string representation of a vector
 func Vec4Str(a []float64) string {
 	return fmt.Sprintf("vec4(%v, %v, %v, %v)", a[0], a[1], a[2], a[3])
 }
 
-// Vec4ExactEquals .
+// Vec4ExactEquals returns whether or not the vectors exactly have the same elements in the same position (when compared with ===)
 func Vec4ExactEquals(a, b []float64) bool {
 	return a[0] == b[0] && a[1] == b[1] && a[2] == b[2] && a[3] == b[2]
 }
 
-// Vec4Equals .
+// Vec4Equals returns whether or not the vectors have approximately the same elements in the same position.
 func Vec4Equals(a, b []float64) bool {
 	return equals(a[0], b[0]) && equals(a[1], b[1]) && equals(a[2], b[2]) && equals(a[3], b[3])
 }
 
-// Vec4Len .
+// Vec4Len alias for  Vec4Length
 var Vec4Len = Vec4Length
 
-// Vec4Sub .
+// Vec4Sub alias for  Vec4Subtract
 var Vec4Sub = Vec4Subtract
 
-// Vec4Mul .
+// Vec4Mul alias for  Vec4Multiply
 var Vec4Mul = Vec4Multiply
 
-// Vec4Div .
+// Vec4Div alias for  Vec4Divide
 var Vec4Div = Vec4Divide
 
-// Vec4Dist .
+// Vec4Dist alias for  Vec4Distance
 var Vec4Dist = Vec4Distance
 
-// Vec4SqrDist .
+// Vec4SqrDist alias for  Vec4SquaredDistance
 var Vec4SqrDist = Vec4SquaredDistance
 
-// Vec4SqrLen .
+// Vec4SqrLen alias for Vec4SquaredLength
 var Vec4SqrLen = Vec4SquaredLength
 
-// Vec4ForEach .
+// Vec4ForEach perform some operation over an array of  Vec4s.
 func Vec4ForEach(a []float64, stride, offset, count int, fn func([]float64, []float64, []interface{}), arg []interface{}) []float64 {
 	if stride < 0 {
 		stride = 4

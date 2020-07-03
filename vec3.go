@@ -6,27 +6,27 @@ import (
 	"math/rand"
 )
 
-// NewVec3 .
+// NewVec3 creates a new, empty Vec3
 func NewVec3() []float64 {
 	return []float64{0., 0., 0.}
 }
 
-// Vec3Create .
+// Vec3Create creates a new Vec3 initialized with values from an existing vector
 func Vec3Create() []float64 {
 	return NewVec3()
 }
 
-// Vec3Clone .
+// Vec3Clone creates a new Vec3 initialized with the given values
 func Vec3Clone(a []float64) []float64 {
 	return []float64{a[0], a[1], a[2]}
 }
 
-// Vec3FromValues .
+// Vec3FromValues creates a new Vec3 initialized with the given values
 func Vec3FromValues(x, y, z float64) []float64 {
 	return []float64{x, y, z}
 }
 
-// Vec3Copy .
+// Vec3Copy copy the values from one Vec3 to another
 func Vec3Copy(out, a []float64) []float64 {
 	out[0] = a[0]
 	out[1] = a[1]
@@ -34,7 +34,7 @@ func Vec3Copy(out, a []float64) []float64 {
 	return out
 }
 
-// Vec3Set .
+// Vec3Set set the components of a Vec3 to the given values
 func Vec3Set(out []float64, x, y, z float64) []float64 {
 	out[0] = x
 	out[1] = y
@@ -42,7 +42,7 @@ func Vec3Set(out []float64, x, y, z float64) []float64 {
 	return out
 }
 
-// Vec3Add .
+// Vec3Add adds two Vec3's
 func Vec3Add(out, a, b []float64) []float64 {
 	out[0] = a[0] + b[0]
 	out[1] = a[1] + b[1]
@@ -50,7 +50,7 @@ func Vec3Add(out, a, b []float64) []float64 {
 	return out
 }
 
-// Vec3Subtract .
+// Vec3Subtract subtracts vector b from vector a
 func Vec3Subtract(out, a, b []float64) []float64 {
 	out[0] = a[0] - b[0]
 	out[1] = a[1] - b[1]
@@ -58,7 +58,7 @@ func Vec3Subtract(out, a, b []float64) []float64 {
 	return out
 }
 
-// Vec3Multiply .
+// Vec3Multiply multiplies two Vec3's
 func Vec3Multiply(out, a, b []float64) []float64 {
 	out[0] = a[0] * b[0]
 	out[1] = a[1] * b[1]
@@ -66,7 +66,7 @@ func Vec3Multiply(out, a, b []float64) []float64 {
 	return out
 }
 
-// Vec3Divide .
+// Vec3Divide divides two Vec3's
 func Vec3Divide(out, a, b []float64) []float64 {
 	out[0] = a[0] / b[0]
 	out[1] = a[1] / b[1]
@@ -74,7 +74,7 @@ func Vec3Divide(out, a, b []float64) []float64 {
 	return out
 }
 
-// Vec3Ceil .
+// Vec3Ceil math.ceil the components of a Vec3
 func Vec3Ceil(out, a []float64) []float64 {
 	out[0] = math.Ceil(a[0])
 	out[1] = math.Ceil(a[1])
@@ -82,7 +82,7 @@ func Vec3Ceil(out, a []float64) []float64 {
 	return out
 }
 
-// Vec3Floor .
+// Vec3Floor math.floor the components of a Vec3
 func Vec3Floor(out, a []float64) []float64 {
 	out[0] = math.Floor(a[0])
 	out[1] = math.Floor(a[1])
@@ -90,7 +90,7 @@ func Vec3Floor(out, a []float64) []float64 {
 	return out
 }
 
-// Vec3Min .
+// Vec3Min returns the minimum of two Vec3's
 func Vec3Min(out, a, b []float64) []float64 {
 	out[0] = math.Min(a[0], b[0])
 	out[1] = math.Min(a[1], b[1])
@@ -98,7 +98,7 @@ func Vec3Min(out, a, b []float64) []float64 {
 	return out
 }
 
-// Vec3Max .
+// Vec3Max returns the maximum of two Vec3's
 func Vec3Max(out, a, b []float64) []float64 {
 	out[0] = math.Max(a[0], b[0])
 	out[1] = math.Max(a[1], b[1])
@@ -106,7 +106,7 @@ func Vec3Max(out, a, b []float64) []float64 {
 	return out
 }
 
-// Vec3Round .
+// Vec3Round math.round the components of a Vec3
 func Vec3Round(out, a []float64) []float64 {
 	out[0] = math.Round(a[0])
 	out[1] = math.Round(a[1])
@@ -114,7 +114,7 @@ func Vec3Round(out, a []float64) []float64 {
 	return out
 }
 
-// Vec3Scale .
+// Vec3Scale scales a Vec3 by a scalar number
 func Vec3Scale(out, a []float64, scale float64) []float64 {
 	out[0] = a[0] * scale
 	out[1] = a[1] * scale
@@ -122,7 +122,7 @@ func Vec3Scale(out, a []float64, scale float64) []float64 {
 	return out
 }
 
-// Vec3ScaleAndAdd .
+// Vec3ScaleAndAdd adds two Vec3's after scaling the second operand by a scalar value
 func Vec3ScaleAndAdd(out, a, b []float64, scale float64) []float64 {
 	out[0] = a[0] + b[0]*scale
 	out[1] = a[1] + b[1]*scale
@@ -130,7 +130,7 @@ func Vec3ScaleAndAdd(out, a, b []float64, scale float64) []float64 {
 	return out
 }
 
-// Vec3Distance .
+// Vec3Distance calculates the euclidian distance between two Vec3's
 func Vec3Distance(a, b []float64) float64 {
 	x := b[0] - a[0]
 	y := b[1] - a[1]
@@ -138,7 +138,7 @@ func Vec3Distance(a, b []float64) float64 {
 	return hypot(x, y, z)
 }
 
-// Vec3SquaredDistance .
+// Vec3SquaredDistance calculates the squared euclidian distance between two Vec3's
 func Vec3SquaredDistance(a, b []float64) float64 {
 	x := b[0] - a[0]
 	y := b[1] - a[1]
@@ -146,7 +146,7 @@ func Vec3SquaredDistance(a, b []float64) float64 {
 	return x*x + y*y + z*z
 }
 
-// Vec3Length .
+// Vec3Length calculates the length of a Vec3
 func Vec3Length(out []float64) float64 {
 	x := out[0]
 	y := out[1]
@@ -154,7 +154,7 @@ func Vec3Length(out []float64) float64 {
 	return hypot(x, y, z)
 }
 
-// Vec3SquaredLength .
+// Vec3SquaredLength calculates the squared length of a Vec3
 func Vec3SquaredLength(out []float64) float64 {
 	x := out[0]
 	y := out[1]
@@ -162,7 +162,7 @@ func Vec3SquaredLength(out []float64) float64 {
 	return x*x + y*y + z*z
 }
 
-// Vec3Negate .
+// Vec3Negate negates the components of a Vec3
 func Vec3Negate(out, a []float64) []float64 {
 	out[0] = -a[0]
 	out[1] = -a[1]
@@ -170,7 +170,7 @@ func Vec3Negate(out, a []float64) []float64 {
 	return out
 }
 
-// Vec3Inverse .
+// Vec3Inverse returns the inverse of the components of a Vec3
 func Vec3Inverse(out, a []float64) []float64 {
 	out[0] = 1. / a[0]
 	out[1] = 1. / a[1]
@@ -178,7 +178,7 @@ func Vec3Inverse(out, a []float64) []float64 {
 	return out
 }
 
-// Vec3Normalize .
+// Vec3Normalize normalize a Vec3
 func Vec3Normalize(out, a []float64) []float64 {
 	len := Vec3Length(a)
 	if 0 < len {
@@ -190,12 +190,12 @@ func Vec3Normalize(out, a []float64) []float64 {
 	return out
 }
 
-// Vec3Dot .
+// Vec3Dot calculates the dot product of two Vec3's
 func Vec3Dot(a, b []float64) float64 {
 	return a[0]*b[0] + a[1]*b[1] + a[2]*b[2]
 }
 
-// Vec3Cross .
+// Vec3Cross computes the cross product of two Vec3's
 func Vec3Cross(out, a, b []float64) []float64 {
 	ax := a[0]
 	ay := a[1]
@@ -209,7 +209,7 @@ func Vec3Cross(out, a, b []float64) []float64 {
 	return out
 }
 
-// Vec3Lerp .
+// Vec3Lerp performs a linear interpolation between two Vec3's
 func Vec3Lerp(out, a, b []float64, t float64) []float64 {
 	ax := a[0]
 	ay := a[1]
@@ -220,7 +220,7 @@ func Vec3Lerp(out, a, b []float64, t float64) []float64 {
 	return out
 }
 
-// Vec3Slerp .
+// Vec3Slerp performs a spherical linear interpolation between two vec3's
 func Vec3Slerp(out, a, b []float64, t float64) []float64 {
 	angle := math.Acos(math.Min(math.Max(Vec3Dot(a, b), -1), 1))
 	sinTotal := math.Sin(angle)
@@ -232,7 +232,7 @@ func Vec3Slerp(out, a, b []float64, t float64) []float64 {
 	return out
 }
 
-// Vec3Hermite .
+// Vec3Hermite performs a hermite interpolation with two control points
 func Vec3Hermite(out, a, b, c, d []float64, t float64) []float64 {
 	factorTimes2 := t * t
 	factor1 := factorTimes2*(2*t-3) + 1
@@ -245,7 +245,7 @@ func Vec3Hermite(out, a, b, c, d []float64, t float64) []float64 {
 	return out
 }
 
-// Vec3Bezier .
+// Vec3Bezier performs a bezier interpolation with two control points
 func Vec3Bezier(out, a, b, c, d []float64, t float64) []float64 {
 	inverseFactor := 1 - t
 	inverseFactorTimesTwo := inverseFactor * inverseFactor
@@ -260,7 +260,7 @@ func Vec3Bezier(out, a, b, c, d []float64, t float64) []float64 {
 	return out
 }
 
-// Vec3Random .
+// Vec3Random generates a random vector with the given scale
 func Vec3Random(out []float64, scale float64) []float64 {
 	r := rand.Float64() * 2.0 * math.Pi
 	z := rand.Float64()*2.0 - 1.0
@@ -272,7 +272,7 @@ func Vec3Random(out []float64, scale float64) []float64 {
 	return out
 }
 
-// Vec3TransformMat3 .
+// Vec3TransformMat3 transforms the vec3 with a mat3
 func Vec3TransformMat3(out, a, m []float64) []float64 {
 	x := a[0]
 	y := a[1]
@@ -283,7 +283,7 @@ func Vec3TransformMat3(out, a, m []float64) []float64 {
 	return out
 }
 
-// Vec3TransformMat4 .
+// Vec3TransformMat4 transforms the vec3 with a mat4
 func Vec3TransformMat4(out, a, m []float64) []float64 {
 	x := a[0]
 	y := a[1]
@@ -298,7 +298,8 @@ func Vec3TransformMat4(out, a, m []float64) []float64 {
 	return out
 }
 
-// Vec3TransformQuat .
+// Vec3TransformQuat transforms the vec3 with a quat
+// Can also be used for dual quaternions. (Multiply it with the real part)
 func Vec3TransformQuat(out, a, q []float64) []float64 {
 	qx := q[0]
 	qy := q[1]
@@ -326,7 +327,7 @@ func Vec3TransformQuat(out, a, q []float64) []float64 {
 	return out
 }
 
-// Vec3RotateX .
+// Vec3RotateX rotate a 3D vector around the x-axis
 func Vec3RotateX(out, a, b []float64, rad float64) []float64 {
 	p := []float64{
 		a[0] - b[0],
@@ -344,7 +345,7 @@ func Vec3RotateX(out, a, b []float64, rad float64) []float64 {
 	return out
 }
 
-// Vec3RotateY .
+// Vec3RotateY rotate a 3D vector around the y-axis
 func Vec3RotateY(out, a, b []float64, rad float64) []float64 {
 	p := []float64{
 		a[0] - b[0],
@@ -362,7 +363,7 @@ func Vec3RotateY(out, a, b []float64, rad float64) []float64 {
 	return out
 }
 
-// Vec3RotateZ .
+// Vec3RotateZ rotate a 3D vector around the z-axis
 func Vec3RotateZ(out, a, b []float64, rad float64) []float64 {
 	p := []float64{
 		a[0] - b[0],
@@ -380,7 +381,7 @@ func Vec3RotateZ(out, a, b []float64, rad float64) []float64 {
 	return out
 }
 
-// Vec3Angle .
+// Vec3Angle get the angle between two 2D vectors
 func Vec3Angle(a, b []float64) float64 {
 	ax := a[0]
 	ay := a[1]
@@ -398,7 +399,7 @@ func Vec3Angle(a, b []float64) float64 {
 	return math.Acos(math.Min(math.Max(cosine, -1), 1))
 }
 
-// Vec3Zero .
+// Vec3Zero set the components of a Vec3 to zero
 func Vec3Zero(out []float64) []float64 {
 	out[0] = 0.
 	out[1] = 0.
@@ -406,43 +407,43 @@ func Vec3Zero(out []float64) []float64 {
 	return out
 }
 
-// Vec3Str .
+// Vec3Str returns a string representation of a vector
 func Vec3Str(out []float64) string {
 	return fmt.Sprintf("vec3(%v, %v, %v)", out[0], out[1], out[2])
 }
 
-// Vec3ExactEquals .
+// Vec3ExactEquals returns whether or not the vectors exactly have the same elements in the same position (when compared with ===)
 func Vec3ExactEquals(a, b []float64) bool {
 	return a[0] == b[0] && a[1] == b[1] && a[2] == b[2]
 }
 
-// Vec3Equals .
+// Vec3Equals returns whether or not the vectors have approximately the same elements in the same position.
 func Vec3Equals(a, b []float64) bool {
 	return equals(a[0], b[0]) && equals(a[1], b[1]) && equals(a[2], b[2])
 }
 
-// Vec3Len .
+// Vec3Len alias for Vec3Length
 var Vec3Len = Vec3Length
 
-// Vec3Sub .
+// Vec3Sub alias for Vec3Subtract
 var Vec3Sub = Vec3Subtract
 
-// Vec3Mul .
+// Vec3Mul alias for Vec3Multiply
 var Vec3Mul = Vec3Multiply
 
-// Vec3Div .
+// Vec3Div alias for Vec3Divide
 var Vec3Div = Vec3Divide
 
-// Vec3Dist .
+// Vec3Dist alias for Vec3Distance
 var Vec3Dist = Vec3Distance
 
-// Vec3SqrDist .
+// Vec3SqrDist alias for Vec3SquaredDistance
 var Vec3SqrDist = Vec3SquaredDistance
 
-// Vec3SqrLen .
+// Vec3SqrLen alias for Vec3SquaredLength
 var Vec3SqrLen = Vec3SquaredLength
 
-// Vec3ForEach .
+// Vec3ForEach perform some operation over an array of Vec3s.
 func Vec3ForEach(a []float64, stride, offset, count int, fn func([]float64, []float64, []interface{}), arg []interface{}) []float64 {
 	if stride < 0 {
 		stride = 3

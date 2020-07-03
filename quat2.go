@@ -541,17 +541,17 @@ func Quat2Normalize(out, a []float64) []float64 {
 		b2 := a[6]
 		b3 := a[7]
 
-		a_dot_b := a0*b0 + a1*b1 + a2*b2 + a3*b3
+		dotAB := a0*b0 + a1*b1 + a2*b2 + a3*b3
 
 		out[0] = a0
 		out[1] = a1
 		out[2] = a2
 		out[3] = a3
 
-		out[4] = (b0 - a0*a_dot_b) / magnitude
-		out[5] = (b1 - a1*a_dot_b) / magnitude
-		out[6] = (b2 - a2*a_dot_b) / magnitude
-		out[7] = (b3 - a3*a_dot_b) / magnitude
+		out[4] = (b0 - a0*dotAB) / magnitude
+		out[5] = (b1 - a1*dotAB) / magnitude
+		out[6] = (b2 - a2*dotAB) / magnitude
+		out[7] = (b3 - a3*dotAB) / magnitude
 	}
 	return out
 }
