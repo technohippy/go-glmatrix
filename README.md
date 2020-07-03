@@ -13,7 +13,7 @@ import (
 )
 
 func main() {
-	pers := glm.Mat4Create() // pers is just a slice ([]float64)
+	pers := glm.Mat4Create() // pers is just a float64 slice
 	glm.Mat4Perspective(pers, glm.ToRadian(45), 640./480, 0.1, 200.)
 	fmt.Println(glm.Mat4Str(pers))
 }

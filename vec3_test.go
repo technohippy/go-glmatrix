@@ -5,7 +5,7 @@ import (
 	"testing"
 )
 
-func TestRotateX(t *testing.T) {
+func TestVec3RotateX(t *testing.T) {
 	actual := Vec3Create()
 	vecA := []float64{0, 1, 0}
 	vecB := []float64{0, 0, 0}
@@ -15,7 +15,7 @@ func TestRotateX(t *testing.T) {
 	}
 }
 
-func TestTransformMat4(t *testing.T) {
+func TestVec3TransformMat4(t *testing.T) {
 	matr := Mat4LookAt(Mat4Create(), []float64{5, 6, 7}, []float64{2, 6, 7}, []float64{0, 1, 0})
 	vecA := []float64{1, 2, 3}
 	actual := Vec3Create()
@@ -25,7 +25,7 @@ func TestTransformMat4(t *testing.T) {
 	}
 }
 
-func TestTransformMat3(t *testing.T) {
+func TestVec3TransformMat3(t *testing.T) {
 	actual := Vec3Create()
 	vecA := []float64{1, 2, 3}
 	matr := []float64{1, 0, 0, 0, 1, 0, 0, 0, 1}
@@ -61,7 +61,7 @@ func TestTransformMat3(t *testing.T) {
 	}
 }
 
-func TestDistance(t *testing.T) {
+func TestVec3Distance(t *testing.T) {
 	vecA := []float64{1, 2, 3}
 	vecB := []float64{4, 5, 6}
 	actual := Vec3Distance(vecA, vecB)
