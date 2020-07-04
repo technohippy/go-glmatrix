@@ -283,3 +283,94 @@ func TestVec3Cross(t *testing.T) {
 		t.Errorf("cross: %v", actual)
 	}
 }
+
+func TestVec3Lerp(t *testing.T) {
+	actual := Vec3Lerp(Vec3Create(), vecA, vecB, 0.5)
+	expect := []float64{2.5, 3.5, 4.5}
+	if !testSlice(actual, expect) {
+		t.Errorf("lerp: %v", actual)
+	}
+}
+
+func TestVec3Slerp(t *testing.T) {
+	actual := Vec3Slerp(Vec3Create(), []float64{1, 0, 0}, []float64{0, 1, 0}, 0)
+	expect := []float64{1, 0, 0}
+	if !testSlice(actual, expect) {
+		t.Errorf("slerp: %v", actual)
+	}
+}
+
+func TestVec3Random(t *testing.T) {
+	actual := Vec3Random(Vec3Create(), 1.)
+	expect := 1.
+	if !equals(Vec3Len(actual), expect) {
+		t.Errorf("random: %v", Vec3Len(actual))
+	}
+
+	actual = Vec3Random(Vec3Create(), 5.)
+	expect = 5.
+	if !equals(Vec3Len(actual), expect) {
+		t.Errorf("random: %v", Vec3Len(actual))
+	}
+}
+
+func TestVec3ForEach(t *testing.T) {
+	vecArray := []float64{
+		1, 2, 3,
+		4, 5, 6,
+		0, 0, 0,
+	}
+	fn := func(a []float64, b []float64, c []float64) {
+		Vec3Normalize(a, b)
+	}
+	actual := Vec3ForEach(vecArray, 0., 0., 0., fn, []float64{})
+	expect := []float64{
+		0.267261, 0.534522, 0.801783,
+		0.455842, 0.569802, 0.683763,
+		0, 0, 0,
+	}
+	if !testSlice(actual, expect) {
+		t.Errorf("forEach: %v", actual)
+	}
+}
+
+func TestVec3Angle(t *testing.T) {
+	actual := Vec3Angle(vecA, vecB)
+	expect := 0.225726
+	if !equals(actual, expect) {
+		t.Errorf("angle: %v", actual)
+	}
+}
+
+func TestVec3ExactEquals(t *testing.T) {
+	vecA := []float64{0, 1, 2}
+	vecB := []float64{0, 1, 2}
+	vecC := []float64{0, 1, 2 + 1e-10}
+	if !Vec3ExactEquals(vecA, vecB) {
+		t.Errorf("exact equal")
+	}
+	if Vec3ExactEquals(vecA, vecC) {
+		t.Errorf("exact equal")
+	}
+}
+
+func TestVec3Equals(t *testing.T) {
+	vecA := []float64{0, 1, 2}
+	vecB := []float64{0, 1, 2}
+	vecC := []float64{0, 1, 2 + 1e-10}
+	if !Vec3Equals(vecA, vecB) {
+		t.Errorf("exact equal")
+	}
+	if !Vec3Equals(vecA, vecC) {
+		t.Errorf("exact equal")
+	}
+}
+
+func TestVec3Zero(t *testing.T) {
+	actual := []float64{1, 2, 3}
+	Vec3Zero(actual)
+	expect := []float64{0, 0, 0}
+	if !testSlice(actual, expect) {
+		t.Errorf("zero: %v", actual)
+	}
+}

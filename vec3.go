@@ -444,15 +444,15 @@ var Vec3SqrDist = Vec3SquaredDistance
 var Vec3SqrLen = Vec3SquaredLength
 
 // Vec3ForEach perform some operation over an array of Vec3s.
-func Vec3ForEach(a []float64, stride, offset, count int, fn func([]float64, []float64, []interface{}), arg []interface{}) []float64 {
-	if stride < 0 {
+func Vec3ForEach(a []float64, stride, offset, count int, fn func([]float64, []float64, []float64), arg []float64) []float64 {
+	if stride <= 0 {
 		stride = 3
 	}
-	if offset < 0 {
+	if offset <= 0 {
 		offset = 0
 	}
 	var l int
-	if 0 <= count {
+	if 0 < count {
 		l = int(math.Min(float64(count*stride+offset), float64(len(a))))
 	} else {
 		l = len(a)
