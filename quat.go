@@ -366,6 +366,9 @@ var QuatLen = QuatLength
 // QuatSquaredLength calculates the squared length of a quat
 var QuatSquaredLength = Vec4SquaredLength
 
+// QuatSqrLen alias for QuatSquaredLength
+var QuatSqrLen = QuatSquaredLength
+
 // QuatNormalize mormalize a quat
 var QuatNormalize = Vec4Normalize
 

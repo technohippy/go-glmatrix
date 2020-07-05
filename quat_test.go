@@ -187,6 +187,105 @@ func TestQuatMultiply(t *testing.T) {
 	actual := QuatMultiply(QuatCreate(), quatA, quatB)
 	expect := []float64{24, 48, 48, -6}
 	if !testSlice(actual, expect) {
-		t.Errorf("add: %v", actual)
+		t.Errorf("multiply: %v", actual)
+	}
+}
+
+func TestQuatScale(t *testing.T) {
+	actual := QuatScale(QuatCreate(), quatA, 2.)
+	expect := []float64{2, 4, 6, 8}
+	if !testSlice(actual, expect) {
+		t.Errorf("scale: %v", actual)
+	}
+}
+
+func TestQuatLength(t *testing.T) {
+	actual := QuatLength(quatA)
+	expect := 5.477225
+	if !equals(actual, expect) {
+		t.Errorf("length: %v", actual)
+	}
+	actual = QuatLen(quatA)
+	if !equals(actual, expect) {
+		t.Errorf("len: %v", actual)
+	}
+}
+
+func TestQuatSquaredLength(t *testing.T) {
+	actual := QuatSquaredLength(quatA)
+	expect := 30.
+	if !equals(actual, expect) {
+		t.Errorf("squared length: %v", actual)
+	}
+	actual = QuatSqrLen(quatA)
+	if !equals(actual, expect) {
+		t.Errorf("sqrlen: %v", actual)
+	}
+}
+
+func TestQuatNormalize(t *testing.T) {
+	quatA := []float64{5, 0, 0, 0}
+	actual := QuatNormalize(QuatCreate(), quatA)
+	expect := []float64{1, 0, 0, 0}
+	if !testSlice(actual, expect) {
+		t.Errorf("normalize: %v", actual)
+	}
+}
+
+func TestQuatLerp(t *testing.T) {
+	actual := QuatLerp(QuatCreate(), quatA, quatB, 0.5)
+	expect := []float64{3, 4, 5, 6}
+	if !testSlice(actual, expect) {
+		t.Errorf("lerp: %v", actual)
+	}
+}
+
+/*
+func TestQuatRandom(t *testing.T) {
+	actual := QuatRandom(QuatCreate())
+	expect := QuatNormalize(QuatCreate(), actual)
+	if !testSlice(actual, expect) {
+		t.Errorf("random: %v %v", actual, expect)
+	}
+}
+*/
+
+func TestQuatInvert(t *testing.T) {
+	actual := QuatInvert(QuatCreate(), quatA)
+	expect := []float64{-0.033333, -0.066666, -0.1, 0.133333}
+	if !testSlice(actual, expect) {
+		t.Errorf("invert: %v", actual)
+	}
+}
+
+func TestQuatConjugate(t *testing.T) {
+	actual := QuatConjugate(QuatCreate(), quatA)
+	expect := []float64{-1, -2, -3, 4}
+	if !testSlice(actual, expect) {
+		t.Errorf("conjugate: %v", actual)
+	}
+}
+
+func TestQuatExactEquals(t *testing.T) {
+	q1 := []float64{0, 0, 0, 1}
+	q2 := []float64{0, 0, 0, 1}
+	q3 := []float64{0, 0, 0, 1 + 1e-10}
+	if !QuatExactEquals(q1, q2) {
+		t.Errorf("exact equals: %v %v", q1, q2)
+	}
+	if QuatExactEquals(q1, q3) {
+		t.Errorf("exact equals: %v %v", q1, q3)
+	}
+}
+
+func TestQuatEquals(t *testing.T) {
+	q1 := []float64{0, 0, 0, 1}
+	q2 := []float64{0, 0, 0, 1}
+	q3 := []float64{0, 0, 0, 1 + 1e-10}
+	if !QuatEquals(q1, q2) {
+		t.Errorf("exact equals: %v %v", q1, q2)
+	}
+	if !QuatEquals(q1, q3) {
+		t.Errorf("exact equals: %v %v", q1, q3)
 	}
 }

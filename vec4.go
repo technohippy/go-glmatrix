@@ -199,9 +199,13 @@ func Vec4Inverse(out, a []float64) []float64 {
 
 // Vec4Normalize normalize a vec4
 func Vec4Normalize(out, a []float64) []float64 {
-	len := Vec4Length(a)
+	x := a[0]
+	y := a[1]
+	z := a[2]
+	w := a[3]
+	len := x*x + y*y + z*z + w*w
 	if 0 < len {
-		len = 1. / len
+		len = 1. / math.Sqrt(len)
 	}
 	out[0] = a[0] * len
 	out[1] = a[1] * len
@@ -331,7 +335,7 @@ func Vec4Str(a []float64) string {
 
 // Vec4ExactEquals returns whether or not the vectors exactly have the same elements in the same position (when compared with ===)
 func Vec4ExactEquals(a, b []float64) bool {
-	return a[0] == b[0] && a[1] == b[1] && a[2] == b[2] && a[3] == b[2]
+	return a[0] == b[0] && a[1] == b[1] && a[2] == b[2] && a[3] == b[3]
 }
 
 // Vec4Equals returns whether or not the vectors have approximately the same elements in the same position.
