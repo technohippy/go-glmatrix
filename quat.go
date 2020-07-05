@@ -233,15 +233,19 @@ func QuatSlerp(out, a, b []float64, t float64) []float64 {
 
 // QuatRandom generates a random unit quaternion
 func QuatRandom(out []float64) []float64 {
+	// Implementation of http://planning.cs.uiuc.edu/node198.html
+	// TODO: Calling random 3 times is probably not the fastest solution
 	u1 := rand.Float64()
 	u2 := rand.Float64()
 	u3 := rand.Float64()
-	sqrt1MinuxU1 := math.Sqrt(1 - u1)
+
+	sqrt1MinuxU1 := math.Sqrt(1. - u1)
 	sqrtU1 := math.Sqrt(u1)
+
 	out[0] = sqrt1MinuxU1 * math.Sin(2.*math.Pi*u2)
 	out[1] = sqrt1MinuxU1 * math.Cos(2.*math.Pi*u2)
 	out[2] = sqrtU1 * math.Sin(2.*math.Pi*u3)
-	out[3] = sqrtU1 * math.Sin(2.*math.Pi*u3)
+	out[3] = sqrtU1 * math.Cos(2.*math.Pi*u3)
 	return out
 }
 

@@ -240,7 +240,6 @@ func TestQuatLerp(t *testing.T) {
 	}
 }
 
-/*
 func TestQuatRandom(t *testing.T) {
 	actual := QuatRandom(QuatCreate())
 	expect := QuatNormalize(QuatCreate(), actual)
@@ -248,7 +247,6 @@ func TestQuatRandom(t *testing.T) {
 		t.Errorf("random: %v %v", actual, expect)
 	}
 }
-*/
 
 func TestQuatInvert(t *testing.T) {
 	actual := QuatInvert(QuatCreate(), quatA)
