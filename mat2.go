@@ -99,7 +99,7 @@ func Mat2Invert(out, a []float64) []float64 {
 
 // Mat2Adjoint calculates the adjugate of a mat2
 func Mat2Adjoint(out, a []float64) []float64 {
-	// Caching this value is nessecary if out == a
+	// Caching this value is nessesary if out == a
 	a0 := a[0]
 	out[0] = a[3]
 	out[1] = -a[1]

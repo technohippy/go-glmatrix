@@ -872,7 +872,7 @@ func Mat4GetTranslation(out, mat []float64) []float64 {
 
 // Mat4GetScaling returns the scaling factor component of a transformation
 // matrix. If a matrix is built with fromRotationTranslationScale
-// with a normalized Quaternion paramter, the returned vector will be
+// with a normalized Quaternion parameter, the returned vector will be
 // the same as the scaling vector
 // originally supplied.
 func Mat4GetScaling(out, mat []float64) []float64 {

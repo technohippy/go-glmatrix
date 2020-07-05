@@ -5,28 +5,28 @@ import (
 	"testing"
 )
 
-var matA = []float64{
+var mat4A = []float64{
 	1, 0, 0, 0,
 	0, 1, 0, 0,
 	0, 0, 1, 0,
 	1, 2, 3, 1,
 }
 
-var matB = []float64{
+var mat4B = []float64{
 	1, 0, 0, 0,
 	0, 1, 0, 0,
 	0, 0, 1, 0,
 	4, 5, 6, 1,
 }
 
-var out = []float64{
+var out4 = []float64{
 	0, 0, 0, 0,
 	0, 0, 0, 0,
 	0, 0, 0, 0,
 	0, 0, 0, 0,
 }
 
-var identity = []float64{
+var identity4 = []float64{
 	1, 0, 0, 0,
 	0, 1, 0, 0,
 	0, 0, 1, 0,
@@ -35,14 +35,14 @@ var identity = []float64{
 
 func TestMat4Create(t *testing.T) {
 	actual := Mat4Create()
-	if !testSlice(actual, identity) {
+	if !testSlice(actual, identity4) {
 		t.Errorf("create: %v", actual)
 	}
 }
 
 func TestMat4Clone(t *testing.T) {
-	actual := Mat4Clone(matA)
-	expect := matA
+	actual := Mat4Clone(mat4A)
+	expect := mat4A
 	if !testSlice(actual, expect) {
 		t.Errorf("clone: %v", actual)
 	}
@@ -50,8 +50,8 @@ func TestMat4Clone(t *testing.T) {
 
 func TestMat4Copy(t *testing.T) {
 	actual := Mat4Create()
-	Mat4Copy(actual, matA)
-	expect := matA
+	Mat4Copy(actual, mat4A)
+	expect := mat4A
 	if !testSlice(actual, expect) {
 		t.Errorf("copy: %v", actual)
 	}
@@ -60,7 +60,7 @@ func TestMat4Copy(t *testing.T) {
 func TestMat4Identity(t *testing.T) {
 	actual := Mat4Create()
 	Mat4Identity(actual)
-	expect := identity
+	expect := identity4
 	if !testSlice(actual, expect) {
 		t.Errorf("identity: %v", actual)
 	}
@@ -68,7 +68,7 @@ func TestMat4Identity(t *testing.T) {
 
 func TestMat4Transpose(t *testing.T) {
 	actual := Mat4Create()
-	Mat4Transpose(actual, matA)
+	Mat4Transpose(actual, mat4A)
 	expect := []float64{
 		1, 0, 0, 1,
 		0, 1, 0, 2,
@@ -82,7 +82,7 @@ func TestMat4Transpose(t *testing.T) {
 
 func TestMat4Invert(t *testing.T) {
 	actual := Mat4Create()
-	Mat4Invert(actual, matA)
+	Mat4Invert(actual, mat4A)
 	expect := []float64{
 		1, 0, 0, 0,
 		0, 1, 0, 0,
@@ -95,7 +95,7 @@ func TestMat4Invert(t *testing.T) {
 }
 
 func TestMat4Adjoint(t *testing.T) {
-	actual := Mat4Adjoint(Mat4Create(), matA)
+	actual := Mat4Adjoint(Mat4Create(), mat4A)
 	expect := []float64{
 		1, 0, 0, 0,
 		0, 1, 0, 0,
@@ -108,7 +108,7 @@ func TestMat4Adjoint(t *testing.T) {
 }
 
 func TestMat4Determinant(t *testing.T) {
-	actual := Mat4Determinant(matA)
+	actual := Mat4Determinant(mat4A)
 	expect := 1.
 	if actual != expect {
 		t.Errorf("determinant: %v", actual)
@@ -117,7 +117,7 @@ func TestMat4Determinant(t *testing.T) {
 
 func TestMat4Multiply(t *testing.T) {
 	actual := Mat4Create()
-	Mat4Multiply(actual, matA, matB)
+	Mat4Multiply(actual, mat4A, mat4B)
 	expect := []float64{
 		1, 0, 0, 0,
 		0, 1, 0, 0,
@@ -131,7 +131,7 @@ func TestMat4Multiply(t *testing.T) {
 
 func TestMat4Translate(t *testing.T) {
 	actual := Mat4Create()
-	Mat4Translate(actual, matA, []float64{4, 5, 6})
+	Mat4Translate(actual, mat4A, []float64{4, 5, 6})
 	expect := []float64{
 		1, 0, 0, 0,
 		0, 1, 0, 0,
@@ -145,7 +145,7 @@ func TestMat4Translate(t *testing.T) {
 
 func TestMat4Scale(t *testing.T) {
 	actual := Mat4Create()
-	Mat4Scale(actual, matA, []float64{4, 5, 6})
+	Mat4Scale(actual, mat4A, []float64{4, 5, 6})
 	expect := []float64{
 		4, 0, 0, 0,
 		0, 5, 0, 0,
@@ -161,7 +161,7 @@ func TestMat4Rotate(t *testing.T) {
 	rad := math.Pi * 0.5
 	axis := []float64{1, 0, 0}
 	actual := Mat4Create()
-	Mat4Rotate(actual, matA, rad, axis)
+	Mat4Rotate(actual, mat4A, rad, axis)
 	expect := []float64{
 		1, 0, 0, 0,
 		0, math.Cos(rad), math.Sin(rad), 0,
@@ -175,7 +175,7 @@ func TestMat4Rotate(t *testing.T) {
 
 func TestMat4RotateX(t *testing.T) {
 	rad := math.Pi * 0.5
-	actual := Mat4RotateX(Mat4Create(), matA, rad)
+	actual := Mat4RotateX(Mat4Create(), mat4A, rad)
 	expect := []float64{
 		1, 0, 0, 0,
 		0, math.Cos(rad), math.Sin(rad), 0,
@@ -189,7 +189,7 @@ func TestMat4RotateX(t *testing.T) {
 
 func TestMat4RotateY(t *testing.T) {
 	rad := math.Pi * 0.5
-	actual := Mat4RotateY(Mat4Create(), matA, rad)
+	actual := Mat4RotateY(Mat4Create(), mat4A, rad)
 	expect := []float64{
 		math.Cos(rad), 0, -math.Sin(rad), 0,
 		0, 1, 0, 0,
@@ -203,7 +203,7 @@ func TestMat4RotateY(t *testing.T) {
 
 func TestMat4RotateZ(t *testing.T) {
 	rad := math.Pi * 0.5
-	actual := Mat4RotateZ(Mat4Create(), matA, rad)
+	actual := Mat4RotateZ(Mat4Create(), mat4A, rad)
 	expect := []float64{
 		math.Cos(rad), math.Sin(rad), 0, 0,
 		-math.Sin(rad), math.Cos(rad), 0, 0,
@@ -216,7 +216,7 @@ func TestMat4RotateZ(t *testing.T) {
 }
 
 func TestMat4GetTranslation(t *testing.T) {
-	actual := Mat4GetTranslation(Vec3Create(), matA)
+	actual := Mat4GetTranslation(Vec3Create(), mat4A)
 	expect := []float64{1, 2, 3}
 	if !testSlice(actual, expect) {
 		t.Errorf("get translation: %v", actual)
@@ -224,7 +224,7 @@ func TestMat4GetTranslation(t *testing.T) {
 }
 
 func TestMat4GetScaling(t *testing.T) {
-	actual := Mat4GetScaling(Vec3Create(), matB)
+	actual := Mat4GetScaling(Vec3Create(), mat4B)
 	expect := []float64{1, 1, 1}
 	if !testSlice(actual, expect) {
 		t.Errorf("get scaling: %v", actual)
@@ -232,7 +232,7 @@ func TestMat4GetScaling(t *testing.T) {
 }
 
 func TestMat4GetRotation(t *testing.T) {
-	actual := Mat4GetRotation(QuatCreate(), identity)
+	actual := Mat4GetRotation(QuatCreate(), identity4)
 	expect := QuatIdentity(QuatCreate())
 	if !testSlice(actual, expect) {
 		t.Errorf("get rotation: %v", actual)
@@ -276,7 +276,7 @@ func TestMat4Ortho(t *testing.T) {
 		0, 0, 0, 1,
 	}
 	if !testSlice(actual, expect) {
-		t.Errorf("should place values into out: %v", actual)
+		t.Errorf("should place values into out4: %v", actual)
 	}
 }
 
@@ -286,16 +286,16 @@ func TestMat4LookAt(t *testing.T) {
 	view := []float64{0, -1, 0}
 	up := []float64{0, 0, -1}
 	//right := []float64{1, 0, 0}
-	out := Mat4Create()
-	Mat4LookAt(out, eye, view, up)
-	actual := Vec3TransformMat4([]float64{0, 0, 0}, view, out)
+	out4 := Mat4Create()
+	Mat4LookAt(out4, eye, view, up)
+	actual := Vec3TransformMat4([]float64{0, 0, 0}, view, out4)
 	expect := []float64{0, 0, -1}
 	if !testSlice(actual, expect) {
 		t.Errorf("looking down: %v", actual)
 	}
 
-	Mat4LookAt(out, []float64{0, 2, 0}, []float64{0, 0.6, 0}, []float64{0, 0, -1})
-	actual = Vec3TransformMat4([]float64{0, 0, 0}, []float64{0, 2, -1}, out)
+	Mat4LookAt(out4, []float64{0, 2, 0}, []float64{0, 0.6, 0}, []float64{0, 0, -1})
+	actual = Vec3TransformMat4([]float64{0, 0, 0}, []float64{0, 2, -1}, out4)
 	expect = []float64{0, 1, 0}
 	if !testSlice(actual, expect) {
 		t.Errorf("#74: %v", actual)
@@ -305,8 +305,8 @@ func TestMat4LookAt(t *testing.T) {
 func TestMat4TargetTo(t *testing.T) {
 	view := []float64{0, -1, 0}
 	up := []float64{0, 0, -1}
-	out := Mat4TargetTo(Mat4Create(), []float64{0, 0, 0}, view, up)
-	actual := Vec3TransformMat4([]float64{0, 0, 0}, view, out)
+	out4 := Mat4TargetTo(Mat4Create(), []float64{0, 0, 0}, view, up)
+	actual := Vec3TransformMat4([]float64{0, 0, 0}, view, out4)
 	expect := []float64{0, 0, 1}
 	if !testSlice(actual, expect) {
 		t.Errorf("target to: %v", actual)
@@ -314,7 +314,7 @@ func TestMat4TargetTo(t *testing.T) {
 }
 
 func TestMat4Str(t *testing.T) {
-	actual := Mat4Str(matA)
+	actual := Mat4Str(mat4A)
 	expect := "mat4(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 1, 2, 3, 1)"
 	if actual != expect {
 		t.Errorf("str: %v", actual)
@@ -322,21 +322,21 @@ func TestMat4Str(t *testing.T) {
 }
 
 func TestMat4Frob(t *testing.T) {
-	actual := Mat4Frob(matA)
+	actual := Mat4Frob(mat4A)
 	expect := math.Sqrt(math.Pow(1, 2) + math.Pow(1, 2) + math.Pow(1, 2) + math.Pow(1, 2) + math.Pow(1, 2) + math.Pow(2, 2) + math.Pow(3, 2))
 	if actual != expect {
 		t.Errorf("frob: %v", actual)
 	}
 }
 
-var matOp1 = []float64{
+var mat4Op1 = []float64{
 	1, 2, 3, 4,
 	5, 6, 7, 8,
 	9, 10, 11, 12,
 	13, 14, 15, 16,
 }
 
-var matOp2 = []float64{
+var mat4Op2 = []float64{
 	17, 18, 19, 20,
 	21, 22, 23, 24,
 	25, 26, 27, 28,
@@ -344,7 +344,7 @@ var matOp2 = []float64{
 }
 
 func TestMat4Add(t *testing.T) {
-	actual := Mat4Add(Mat4Create(), matOp1, matOp2)
+	actual := Mat4Add(Mat4Create(), mat4Op1, mat4Op2)
 	expect := []float64{
 		18, 20, 22, 24,
 		26, 28, 30, 32,
@@ -357,7 +357,7 @@ func TestMat4Add(t *testing.T) {
 }
 
 func TestMat4Subtract(t *testing.T) {
-	actual := Mat4Subtract(Mat4Create(), matOp1, matOp2)
+	actual := Mat4Subtract(Mat4Create(), mat4Op1, mat4Op2)
 	expect := []float64{
 		-16, -16, -16, -16,
 		-16, -16, -16, -16,
@@ -397,7 +397,7 @@ func TestMat4Set(t *testing.T) {
 }
 
 func TestMat4MultiplyScalar(t *testing.T) {
-	actual := Mat4MultiplyScalar(Mat4Create(), matOp1, 2)
+	actual := Mat4MultiplyScalar(Mat4Create(), mat4Op1, 2)
 	expect := []float64{
 		2, 4, 6, 8,
 		10, 12, 14, 16,
@@ -410,7 +410,7 @@ func TestMat4MultiplyScalar(t *testing.T) {
 }
 
 func TestMat4MultiplyScalarAndAdd(t *testing.T) {
-	actual := Mat4MultiplyScalarAndAdd(Mat4Create(), matOp1, matOp2, 0.5)
+	actual := Mat4MultiplyScalarAndAdd(Mat4Create(), mat4Op1, mat4Op2, 0.5)
 	expect := []float64{
 		9.5, 11, 12.5, 14,
 		15.5, 17, 18.5, 20,
@@ -423,13 +423,13 @@ func TestMat4MultiplyScalarAndAdd(t *testing.T) {
 }
 
 func TestMat4ExactEquals(t *testing.T) {
-	matA := []float64{
+	mat4A := []float64{
 		1, 1, 1, 1,
 		1, 1, 1, 1,
 		1, 1, 1, 1,
 		1, 1, 1, 1,
 	}
-	matB := []float64{
+	mat4B := []float64{
 		1, 1, 1, 1,
 		1, 1, 1, 1,
 		1, 1, 1, 1,
@@ -441,22 +441,22 @@ func TestMat4ExactEquals(t *testing.T) {
 		1, 1, 1, 1,
 		1, 1, 1, 1 + 1e-10,
 	}
-	if !Mat4ExactEquals(matA, matB) {
+	if !Mat4ExactEquals(mat4A, mat4B) {
 		t.Errorf("exact equal")
 	}
-	if Mat4ExactEquals(matA, matC) {
+	if Mat4ExactEquals(mat4A, matC) {
 		t.Errorf("exact equal")
 	}
 }
 
 func TestMat4Equals(t *testing.T) {
-	matA := []float64{
+	mat4A := []float64{
 		1, 1, 1, 1,
 		1, 1, 1, 1,
 		1, 1, 1, 1,
 		1, 1, 1, 1,
 	}
-	matB := []float64{
+	mat4B := []float64{
 		1, 1, 1, 1,
 		1, 1, 1, 1,
 		1, 1, 1, 1,
@@ -468,10 +468,10 @@ func TestMat4Equals(t *testing.T) {
 		1, 1, 1, 1,
 		1, 1, 1, 1 + 1e-10,
 	}
-	if !Mat4Equals(matA, matB) {
+	if !Mat4Equals(mat4A, mat4B) {
 		t.Errorf("equal")
 	}
-	if !Mat4Equals(matA, matC) {
+	if !Mat4Equals(mat4A, matC) {
 		t.Errorf("equal")
 	}
 }
