@@ -50,9 +50,9 @@ func QuatGetAxisAngle(out, q []float64) float64 {
 	rad := math.Acos(q[3]) * 2.
 	s := math.Sin(rad / 2.)
 	if s > Epsilon {
-		out[0] = q[0] / 2
-		out[1] = q[1] / 2
-		out[2] = q[2] / 2
+		out[0] = q[0] / s
+		out[1] = q[1] / s
+		out[2] = q[2] / s
 	} else {
 		out[0] = 1.
 		out[1] = 0.
