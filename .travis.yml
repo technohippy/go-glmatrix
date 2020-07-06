@@ -2,10 +2,26 @@ lagugage: go
 sudo: false
 go:
 - 1.11
+
+install:
+- go get golang.org/x/tools/cmd/cover
+- go get github.com/modocache/gover
+- go get github.com/mattn/goveralls
+- go get honnef.co/go/tools/cmd/gosimple
+- go get honnef.co/go/tools/cmd/unused
+- go get honnef.co/go/tools/cmd/staticcheck
+
 script:
+- go vet $(go list ./... | grep -v /vendor/)
+- unused $(go list ./... | grep -v /vendor/)
+- gosimple $(go list ./... | grep -v /vendor/)
+- staticcheck $(go list ./... | grep -v /vendor/)
 - go test -cover -coverpkg github.com/smith-30/go-ffprobe -coverprofile go-ffprobe.coverprofile
+
 after_script:
+- gover
 - goveralls -coverprofile=gover.coverprofile -repotoken $COVERALLS_TOKEN
+
 env:
   global:
     secure: TA3qr7Cbx+/F4wWyG/vkdFAbZbt8h4qI4VrBOIPKj0QzbQmThL6BwTMKGRyJJsiJAPyQ6yeyF5iPgEz2PClHaPmjFN/b8BzJTnBN6T7r28xJ7vkpox6Evbgl7uiz8bJogwnr387u19VE4CyFge48Vpvkloqi87U/5U8h6uFUq6Nj/35dlNnHGg6bhz/ku7zJxVM1eUmPx0mQ1QsB1vz3Sam6uRbPGJtP3zdUskbiXWE6ZbG1xOYfeBdfvHE9jnysXsoqx8ruEwVPP2wutgBaff3ckXGbYNSIWOoswfqHNMqWcpnzeG7Su9/6HoYP1nPBt2cvLK3ZzMeWPD686cgurA5ihv6K0OfBocyXNcgaWp+ngF08SKCRP40Jy335WZV+nyvBBJNogfNYuZSlhghyZtvQNvBEpjqyRONaxQKi1WpWiZbXIWsKdFJs9ux9Fo61Gmc7F3CjJrZcXMuQF5IkM30if4cNEHmWSwEuSQs5NmaMhy/nIYtSTY6z30RVC2D/sDhoTNrOVcLYuUEIxywdARTw5fICMzW0srKmJYKVwE2z3/qfX7BN96ITTvNv6JC7A+VBVsM2kgLAo9UdlfW5nyV4gdDBYfganUv6Zy1nAsutkE24G+5N7Vv9zKuL7MOxcXcHiULn47YwrR+2vpg8wlOGCLdyuDIUxJSJkgXQuPY=
