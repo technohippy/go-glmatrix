@@ -152,6 +152,17 @@ func TestMat4Translate(t *testing.T) {
 	if !testSlice(actual, expect) {
 		t.Errorf("translate: %v", actual)
 	}
+
+	actual = []float64{
+		1, 0, 0, 0,
+		0, 1, 0, 0,
+		0, 0, 1, 0,
+		1, 2, 3, 1,
+	}
+	Mat4Translate(actual, actual, []float64{4, 5, 6})
+	if !testSlice(actual, expect) {
+		t.Errorf("translate: %v", actual)
+	}
 }
 
 func TestMat4Scale(t *testing.T) {
@@ -321,6 +332,32 @@ func TestMat4TargetTo(t *testing.T) {
 	expect := []float64{0, 0, 1}
 	if !testSlice(actual, expect) {
 		t.Errorf("target to: %v", actual)
+	}
+}
+
+func TestMat4FromTranslation(t *testing.T) {
+	actual := Mat4FromTranslation(Mat4Create(), []float64{2, 3, 4})
+	expect := []float64{
+		1, 0, 0, 0,
+		0, 1, 0, 0,
+		0, 0, 1, 0,
+		2, 3, 4, 1,
+	}
+	if !testSlice(actual, expect) {
+		t.Errorf("from translation: %v", actual)
+	}
+}
+
+func TestMat4FromScaling(t *testing.T) {
+	actual := Mat4FromScaling(Mat4Create(), []float64{2, 3, 4})
+	expect := []float64{
+		2, 0, 0, 0,
+		0, 3, 0, 0,
+		0, 0, 4, 0,
+		0, 0, 0, 1,
+	}
+	if !testSlice(actual, expect) {
+		t.Errorf("from scaling: %v", actual)
 	}
 }
 
