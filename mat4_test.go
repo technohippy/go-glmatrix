@@ -361,6 +361,66 @@ func TestMat4FromScaling(t *testing.T) {
 	}
 }
 
+func TestMat4FromRotation(t *testing.T) {
+	actual := Mat4FromRotation(Mat4Create(), math.Pi/4, []float64{0, 1, 0})
+	s := math.Sin(math.Pi / 4)
+	c := math.Cos(math.Pi / 4)
+	expect := []float64{
+		c, 0, -s, 0,
+		0, 1, 0, 0,
+		s, 0, c, 0,
+		0, 0, 0, 1,
+	}
+	if !testSlice(actual, expect) {
+		t.Errorf("from rotation: \n%v \n%v", actual, expect)
+	}
+}
+
+func TestMat4FromXRotation(t *testing.T) {
+	actual := Mat4FromXRotation(Mat4Create(), math.Pi/4)
+	s := math.Sin(math.Pi / 4)
+	c := math.Cos(math.Pi / 4)
+	expect := []float64{
+		1, 0, 0, 0,
+		0, c, s, 0,
+		0, -s, c, 0,
+		0, 0, 0, 1,
+	}
+	if !testSlice(actual, expect) {
+		t.Errorf("from rotation: \n%v \n%v", actual, expect)
+	}
+}
+
+func TestMat4FromYRotation(t *testing.T) {
+	actual := Mat4FromYRotation(Mat4Create(), math.Pi/4)
+	s := math.Sin(math.Pi / 4)
+	c := math.Cos(math.Pi / 4)
+	expect := []float64{
+		c, 0, -s, 0,
+		0, 1, 0, 0,
+		s, 0, c, 0,
+		0, 0, 0, 1,
+	}
+	if !testSlice(actual, expect) {
+		t.Errorf("from rotation: \n%v \n%v", actual, expect)
+	}
+}
+
+func TestMat4FromZRotation(t *testing.T) {
+	actual := Mat4FromZRotation(Mat4Create(), math.Pi/4)
+	s := math.Sin(math.Pi / 4)
+	c := math.Cos(math.Pi / 4)
+	expect := []float64{
+		c, s, 0, 0,
+		-s, c, 0, 0,
+		0, 0, 1, 0,
+		0, 0, 0, 1,
+	}
+	if !testSlice(actual, expect) {
+		t.Errorf("from rotation: \n%v \n%v", actual, expect)
+	}
+}
+
 func TestMat4Str(t *testing.T) {
 	actual := Mat4Str(mat4A)
 	expect := "mat4(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 1, 2, 3, 1)"
