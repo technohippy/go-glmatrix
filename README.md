@@ -21,7 +21,8 @@ func main() {
 
 # Document
 
-See [the documentation for glMatrix](http://glmatrix.net/docs/)
+- See [https://pkg.go.dev/](https://pkg.go.dev/github.com/technohippy/go-glmatrix)
+- or See [the documentation for glMatrix](http://glmatrix.net/docs/)
 
 # License
 

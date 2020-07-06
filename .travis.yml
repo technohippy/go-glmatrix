@@ -1,0 +1,6 @@
+lagugage: go
+sudo: false
+go: 
+  - 1.11
+script:
+  - go test -cover -coverpkg github.com/smith-30/go-ffprobe -coverprofile go-ffprobe.coverprofile
