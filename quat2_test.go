@@ -64,6 +64,37 @@ func TestQuat2Invert(t *testing.T) {
 	}
 }
 
+func TestQuat2SetReal(t *testing.T) {
+	quat2A := []float64{
+		1, 2, 3, 4,
+		2, 5, 6, -2,
+	}
+	actual := Quat2SetReal(quat2A, []float64{4, 6, 8, -100})
+	expect := []float64{4, 6, 8, -100, 2, 5, 6, -2}
+	if !testSlice(actual, expect) {
+		t.Errorf("set real: %v", actual)
+	}
+}
+func TestQuat2SetDual(t *testing.T) {
+	quat2A := []float64{
+		1, 2, 3, 4,
+		2, 5, 6, -2,
+	}
+	actual := Quat2SetDual(quat2A, []float64{4.3, 6, 8, -100})
+	expect := []float64{1, 2, 3, 4, 4.3, 6, 8, -100}
+	if !testSlice(actual, expect) {
+		t.Errorf("set dual: %v", actual)
+	}
+}
+
+func TestQuat2Conjugate(t *testing.T) {
+	actual := Quat2Conjugate(Quat2Create(), quat2A)
+	expect := []float64{-1, -2, -3, 4, -2, -5, -6, -2}
+	if !testSlice(actual, expect) {
+		t.Errorf("conjugate: %v", actual)
+	}
+}
+
 func TestQuat2Multiply(t *testing.T) {
 	actual := Quat2Create()
 	Quat2Multiply(actual, quat2A, quat2B)
@@ -73,6 +104,14 @@ func TestQuat2Multiply(t *testing.T) {
 	}
 	if !testSlice(actual, expect) {
 		t.Errorf("multiply: %v", actual)
+	}
+}
+
+func TestQuat2Lerp(t *testing.T) {
+	actual := Quat2Lerp(Quat2Create(), quat2A, quat2B, 0.7)
+	expect := []float64{3.8, 4.8, 5.8, 6.8, 6.9, 7.1, 6.0, -3.4}
+	if !testSlice(actual, expect) {
+		t.Errorf("lerp: %v", actual)
 	}
 }
 
@@ -97,6 +136,19 @@ func TestQuat2Scale(t *testing.T) {
 	}
 	if !testSlice(actual, expect) {
 		t.Errorf("scale: %v", actual)
+	}
+}
+
+func TestQuat2Length(t *testing.T) {
+	actual := Quat2Length(quat2A)
+	expect := 5.477225
+	if !equals(actual, expect) {
+		t.Errorf("length: %v", actual)
+	}
+
+	actual = Quat2Len(quat2A)
+	if !equals(actual, expect) {
+		t.Errorf("len: %v", actual)
 	}
 }
 
@@ -141,6 +193,14 @@ func TestQuat2RotateZ(t *testing.T) {
 	}
 }
 */
+
+func TestQuat2FromRotationTranslationValues(t *testing.T) {
+	actual := Quat2FromRotationTranslationValues(1, 2, 3, 4, 1, 2, 3)
+	expect := []float64{1, 2, 3, 4, 2, 4, 6, -7}
+	if !testSlice(actual, expect) {
+		t.Errorf("from rotation toranslation values: %v", actual)
+	}
+}
 
 func TestQuat2GetTranslation(t *testing.T) {
 	quat2A := Quat2FromTranslation(Quat2Create(), []float64{1, 2, 3})

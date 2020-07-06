@@ -7,7 +7,7 @@
 
 go-glmatrix is a golang version of [glMatrix](http://glmatrix.net/), which is ``designed to perform vector and matrix operations stupidly fast''.
 
-# Usage
+## Usage
 
 ```go
 package main
@@ -24,11 +24,11 @@ func main() {
 }
 ```
 
-# Document
+## Document
 
 - See [https://pkg.go.dev/](https://pkg.go.dev/github.com/technohippy/go-glmatrix)
 - or See [the documentation for glMatrix](http://glmatrix.net/docs/)
 
-# License
+## License
 
 MIT
