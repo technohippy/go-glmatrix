@@ -441,6 +441,30 @@ func TestMat4FromRotationTranslationScale(t *testing.T) {
 	}
 }
 
+func TestMat4FromRotationTranslationScaleOrigin(t *testing.T) {
+	q := QuatFromValues(1, 0, 0, 0)
+	v := Vec3FromValues(1, 2, 3)
+	s := []float64{4, 5, 6}
+	o := []float64{7, 8, 9}
+
+	actual := Mat4FromRotationTranslationScaleOrigin(Mat4Create(), q, v, s, o)
+
+	transMat := Mat4Create()
+	Mat4Identity(transMat)
+	Mat4Translate(transMat, transMat, v)
+	Mat4Translate(transMat, transMat, o)
+	rotateMat := Mat4Create()
+	rotateMat = Mat4FromQuat(rotateMat, q)
+	expect := Mat4Multiply(Mat4Create(), transMat, rotateMat)
+	Mat4Scale(expect, expect, s)
+	no := Vec3Negate(Vec3Create(), o)
+	Mat4Translate(expect, expect, no)
+
+	if !testSlice(actual, expect) {
+		t.Errorf("from rotation, translation, scale and origin: \n%v \n%v", actual, expect)
+	}
+}
+
 func TestMat4Str(t *testing.T) {
 	actual := Mat4Str(mat4A)
 	expect := "mat4(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 1, 2, 3, 1)"
