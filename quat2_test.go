@@ -4,6 +4,26 @@ import (
 	"testing"
 )
 
+func equalsQuat2(q1, q2 []float64) bool {
+	allSignsFlipped := false
+	if len(q1) != len(q2) {
+		return false
+	}
+	for i := 0; i < len(q1); i++ {
+		if allSignsFlipped {
+			if !equals(q1[i], -q2[i]) {
+				return false
+			}
+		} else {
+			if !equals(q1[i], q2[i]) {
+				allSignsFlipped = true
+				i = 0
+			}
+		}
+	}
+	return true
+}
+
 var quat2A = []float64{
 	1, 2, 3, 4,
 	2, 5, 6, -2,
@@ -161,7 +181,6 @@ func TestQuat2Length(t *testing.T) {
 	}
 }
 
-/*
 func TestQuat2RotateX(t *testing.T) {
 	quat2A := Quat2Normalize(Quat2Create(), quat2A)
 	matrixA := Mat4FromQuat2(Mat4Create(), quat2A)
@@ -169,39 +188,36 @@ func TestQuat2RotateX(t *testing.T) {
 	actual := Quat2RotateX(Quat2Create(), quat2A, 5)
 	matOut := Mat4RotateX(Mat4Create(), matrixA, 5)
 	expect := Quat2FromMat4(Quat2Create(), matOut)
-	if !testSlice(actual, expect) {
+	if !equalsQuat2(actual, expect) {
 		t.Errorf("rotate x: \n%v \n%v", actual, expect)
 	}
 }
 
+/*
 func TestQuat2RotateY(t *testing.T) {
-	rad := math.Pi * 0.5
-	actual := Quat2RotateY(Quat2Create(), quat2A, rad)
-	expect := []float64{
-		math.Cos(rad), 0, -math.Sin(rad), 0,
-		0, 1, 0, 0,
-		math.Sin(rad), 0, math.Cos(rad), 0,
-		1, 2, 3, 1,
-	}
-	if !testSlice(actual, expect) {
-		t.Errorf("rotate y: %v", actual)
-	}
-}
+	quat2A := Quat2Normalize(Quat2Create(), quat2A)
+	matrixA := Mat4FromQuat2(Mat4Create(), quat2A)
 
-func TestQuat2RotateZ(t *testing.T) {
-	rad := math.Pi * 0.5
-	actual := Quat2RotateZ(Quat2Create(), quat2A, rad)
-	expect := []float64{
-		math.Cos(rad), math.Sin(rad), 0, 0,
-		-math.Sin(rad), math.Cos(rad), 0, 0,
-		0, 0, 1, 0,
-		1, 2, 3, 1,
-	}
-	if !testSlice(actual, expect) {
-		t.Errorf("rotate z: %v", actual)
+	actual := Quat2RotateY(Quat2Create(), quat2A, -2)
+	matOut := Mat4RotateY(Mat4Create(), matrixA, -2)
+	expect := Quat2FromMat4(Quat2Create(), matOut)
+	if !equalsQuat2(actual, expect) {
+		t.Errorf("rotate y: \n%v \n%v", actual, expect)
 	}
 }
 */
+
+func TestQuat2RotateZ(t *testing.T) {
+	quat2A := Quat2Normalize(Quat2Create(), quat2A)
+	matrixA := Mat4FromQuat2(Mat4Create(), quat2A)
+
+	actual := Quat2RotateZ(Quat2Create(), quat2A, 1)
+	matOut := Mat4RotateZ(Mat4Create(), matrixA, 1)
+	expect := Quat2FromMat4(Quat2Create(), matOut)
+	if !equalsQuat2(actual, expect) {
+		t.Errorf("rotate z: \n%v \n%v", actual, expect)
+	}
+}
 
 func TestQuat2FromRotation(t *testing.T) {
 	actual := Quat2FromRotation(Quat2Create(), []float64{1, 2, 3, 4})
