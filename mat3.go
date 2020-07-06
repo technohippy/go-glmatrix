@@ -498,7 +498,7 @@ func Mat3Str(a []float64) string {
 
 // Mat3Frob returns Frobenius norm of a mat3
 func Mat3Frob(a []float64) float64 {
-	return hypot(a[0], a[1], a[2], a[3], a[4], a[5], a[6], a[7])
+	return hypot(a[0], a[1], a[2], a[3], a[4], a[5], a[6], a[7], a[8])
 }
 
 // Mat3Add adds two mat3's

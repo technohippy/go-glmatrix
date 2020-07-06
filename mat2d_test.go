@@ -157,20 +157,6 @@ func TestMat2dFrob(t *testing.T) {
 	}
 }
 
-var Mat2dOp1 = []float64{
-	1, 2, 3, 4,
-	5, 6, 7, 8,
-	9, 10, 11, 12,
-	13, 14, 15, 16,
-}
-
-var Mat2dOp2 = []float64{
-	17, 18, 19, 20,
-	21, 22, 23, 24,
-	25, 26, 27, 28,
-	29, 30, 31, 32,
-}
-
 func TestMat2dAdd(t *testing.T) {
 	actual := Mat2dAdd(Mat2dCreate(), mat2dA, mat2dB)
 	expect := []float64{
@@ -221,7 +207,7 @@ func TestMat2dSet(t *testing.T) {
 }
 
 func TestMat2dMultiplyScalar(t *testing.T) {
-	actual := Mat2dMultiplyScalar(Mat2dCreate(), Mat2dOp1, 2)
+	actual := Mat2dMultiplyScalar(Mat2dCreate(), mat2dA, 2)
 	expect := []float64{
 		2, 4,
 		6, 8,
@@ -233,11 +219,11 @@ func TestMat2dMultiplyScalar(t *testing.T) {
 }
 
 func TestMat2dMultiplyScalarAndAdd(t *testing.T) {
-	actual := Mat2dMultiplyScalarAndAdd(Mat2dCreate(), Mat2dOp1, Mat2dOp2, 0.5)
+	actual := Mat2dMultiplyScalarAndAdd(Mat2dCreate(), mat2dA, mat2dB, 0.5)
 	expect := []float64{
-		9.5, 11,
-		12.5, 14,
-		15.5, 17,
+		4.5, 6,
+		7.5, 9,
+		10.5, 12,
 	}
 	if !testSlice(actual, expect) {
 		t.Errorf("multiply scalar and add: %v", actual)
