@@ -226,6 +226,48 @@ func TestMat3FromMat2d(t *testing.T) {
 	}
 }
 
+func TestMat3FromQuat(t *testing.T) {
+	actual := Mat3FromQuat(Mat3Create(), []float64{0, -0.7071067811865475, 0, 0.7071067811865475})
+	expect := []float64{
+		0, 0, 1,
+		0, 1, 0,
+		-1, 0, 0,
+	}
+	if !testSlice(actual, expect) {
+		t.Errorf("from quat: %v", actual)
+	}
+}
+
+func TestMat3NormalFromMat4(t *testing.T) {
+	matA := []float64{
+		1, 0, 0, 0,
+		0, 1, 0, 0,
+		0, 0, 1, 0,
+		0, 0, 0, 1,
+	}
+	actual := Mat3NormalFromMat4(Mat3Create(), matA)
+	expect := []float64{
+		1, 0, 0,
+		0, 1, 0,
+		0, 0, 1,
+	}
+	if !testSlice(actual, expect) {
+		t.Errorf("normal from mat4: %v", actual)
+	}
+}
+
+func TestMat3Projection(t *testing.T) {
+	actual := Mat3Projection(Mat3Create(), 100, 200)
+	expect := []float64{
+		0.02, 0, 0,
+		0, -0.01, 0,
+		-1, 1, 1,
+	}
+	if !testSlice(actual, expect) {
+		t.Errorf("projection: %v", actual)
+	}
+}
+
 func TestMat3Str(t *testing.T) {
 	actual := Mat3Str(mat3A)
 	expect := "mat3(1, 0, 0, 0, 1, 0, 1, 2, 1)"
