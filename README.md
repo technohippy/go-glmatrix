@@ -1,5 +1,6 @@
 [![Build Status](https://secure.travis-ci.org/technohippy/go-glmatrix.png?branch=master)](http://travis-ci.org/technohippy/go-glmatrix)
 [![Coverage Status](https://coveralls.io/repos/technohippy/go-glmatrix/badge.svg?branch=master)](https://coveralls.io/r/technohippy/go-glmatrix?branch=master)
+[![Go Report Card](https://goreportcard.com/badge/github.com/technohippy/go-glmatrix)](https://goreportcard.com/report/github.com/technohippy/go-glmatrix)
 [![GoDoc](https://godoc.org/github.com/technohippy/go-glmatrix?status.svg)](https://godoc.org/github.com/technohippy/go-glmatrix)
 [![license](https://img.shields.io/badge/license-MIT-4183c4.svg)](https://github.com/technohippy/go-glmatrix/blob/master/LICENSE.txt)
 
