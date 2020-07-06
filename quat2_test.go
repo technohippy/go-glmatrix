@@ -193,7 +193,6 @@ func TestQuat2RotateX(t *testing.T) {
 	}
 }
 
-/*
 func TestQuat2RotateY(t *testing.T) {
 	quat2A := Quat2Normalize(Quat2Create(), quat2A)
 	matrixA := Mat4FromQuat2(Mat4Create(), quat2A)
@@ -205,7 +204,6 @@ func TestQuat2RotateY(t *testing.T) {
 		t.Errorf("rotate y: \n%v \n%v", actual, expect)
 	}
 }
-*/
 
 func TestQuat2RotateZ(t *testing.T) {
 	quat2A := Quat2Normalize(Quat2Create(), quat2A)

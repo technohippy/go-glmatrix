@@ -104,6 +104,7 @@ func QuatRotateX(out, a []float64, rad float64) []float64 {
 // QuatRotateY rotates a quaternion by the given angle about the Y axis
 func QuatRotateY(out, a []float64, rad float64) []float64 {
 	rad *= 0.5
+
 	ax := a[0]
 	ay := a[1]
 	az := a[2]
@@ -113,8 +114,8 @@ func QuatRotateY(out, a []float64, rad float64) []float64 {
 
 	out[0] = ax*bw - az*by
 	out[1] = ay*bw + aw*by
-	out[2] = az*bw + ay*by
-	out[3] = aw*bw - ax*by
+	out[2] = az*bw + ax*by
+	out[3] = aw*bw - ay*by
 	return out
 }
 
