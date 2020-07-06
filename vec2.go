@@ -242,14 +242,14 @@ func Vec2TransformMat4(out, a, m []float64) []float64 {
 }
 
 // Vec2Rotate rotate a 2D vector
-func Vec2Rotate(out, a, b []float64, rad float64) []float64 {
-	p0 := a[0] - b[0]
-	p1 := a[1] - b[1]
+func Vec2Rotate(out, p, c []float64, rad float64) []float64 {
+	p0 := p[0] - c[0]
+	p1 := p[1] - c[1]
 	sinC := math.Sin(rad)
 	cosC := math.Cos(rad)
 
-	out[0] = p0*cosC - p1*sinC + b[0]
-	out[1] = p0*sinC + p1*cosC + b[1]
+	out[0] = p0*cosC - p1*sinC + c[0]
+	out[1] = p0*sinC + p1*cosC + c[1]
 	return out
 }
 

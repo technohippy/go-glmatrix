@@ -242,6 +242,66 @@ func TestVec2Random(t *testing.T) {
 	}
 }
 
+func TestVec2TransformMat2(t *testing.T) {
+	matA := []float64{
+		1, 2,
+		3, 4,
+	}
+	actual := Vec2TransformMat2(Vec2Create(), vec2A, matA)
+	expect := []float64{7, 10}
+	if !testSlice(actual, expect) {
+		t.Errorf("transform mat2: %v %v", actual, expect)
+	}
+}
+
+func TestVec2TransformMat2d(t *testing.T) {
+	matA := []float64{
+		1, 2,
+		3, 4,
+		5, 6,
+	}
+	actual := Vec2TransformMat2d(Vec2Create(), vec2A, matA)
+	expect := []float64{12, 16}
+	if !testSlice(actual, expect) {
+		t.Errorf("transform mat2: %v %v", actual, expect)
+	}
+}
+
+func TestVec2TransformMat3(t *testing.T) {
+	matA := []float64{
+		1, 2, 3,
+		4, 5, 6,
+		7, 8, 9,
+	}
+	actual := Vec2TransformMat3(Vec2Create(), vec2A, matA)
+	expect := []float64{14, 18}
+	if !testSlice(actual, expect) {
+		t.Errorf("transform mat3: %v %v", actual, expect)
+	}
+}
+
+func TestVec2TransformMat4(t *testing.T) {
+	matA := []float64{
+		1, 2, 3, 4,
+		5, 6, 7, 8,
+		9, 10, 11, 12,
+		13, 14, 15, 16,
+	}
+	actual := Vec2TransformMat4(Vec2Create(), vec2A, matA)
+	expect := []float64{20, 24}
+	if !testSlice(actual, expect) {
+		t.Errorf("transform mat3: %v %v", actual, expect)
+	}
+}
+
+func TestVec2Rotate(t *testing.T) {
+	actual := Vec2Rotate(Vec2Create(), []float64{2, 0}, []float64{1, 0}, math.Pi/2)
+	expect := []float64{1, 1}
+	if !testSlice(actual, expect) {
+		t.Errorf("rotate: %v %v", actual, expect)
+	}
+}
+
 func TestVec2ForEach(t *testing.T) {
 	vec2Array := []float64{
 		1, 2,
