@@ -176,6 +176,56 @@ func TestMat3Rotate(t *testing.T) {
 	}
 }
 
+func TestMat3FromTranslation(t *testing.T) {
+	actual := Mat3FromTranslation(Mat3Create(), []float64{2, 3})
+	expect := []float64{
+		1, 0, 0,
+		0, 1, 0,
+		2, 3, 1,
+	}
+	if !testSlice(actual, expect) {
+		t.Errorf("from translation: %v", actual)
+	}
+}
+
+func TestMat3FromRotation(t *testing.T) {
+	actual := Mat3FromRotation(Mat3Create(), math.Pi/4)
+	s := math.Sin(math.Pi / 4)
+	c := math.Cos(math.Pi / 4)
+	expect := []float64{
+		c, s, 0,
+		-s, c, 0,
+		0, 0, 1,
+	}
+	if !testSlice(actual, expect) {
+		t.Errorf("from rotation: %v", actual)
+	}
+}
+
+func TestMat3FromScaling(t *testing.T) {
+	actual := Mat3FromScaling(Mat3Create(), []float64{2, 3})
+	expect := []float64{
+		2, 0, 0,
+		0, 3, 0,
+		0, 0, 1,
+	}
+	if !testSlice(actual, expect) {
+		t.Errorf("from scaling: %v", actual)
+	}
+}
+
+func TestMat3FromMat2d(t *testing.T) {
+	actual := Mat3FromMat2d(Mat3Create(), []float64{1, 2, 3, 4, 5, 6})
+	expect := []float64{
+		1, 2, 0,
+		3, 4, 0,
+		5, 6, 1,
+	}
+	if !testSlice(actual, expect) {
+		t.Errorf("from mat2d: %v", actual)
+	}
+}
+
 func TestMat3Str(t *testing.T) {
 	actual := Mat3Str(mat3A)
 	expect := "mat3(1, 0, 0, 0, 1, 0, 1, 2, 1)"
