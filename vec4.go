@@ -264,7 +264,7 @@ func Vec4Random(out []float64, scale float64) []float64 {
 		v1 = rand.Float64()*2 - 1
 		v2 = rand.Float64()*2 - 1
 		s1 = v1*v1 + v2*v2
-		if s1 >= 1 {
+		if s1 < 1 {
 			break
 		}
 	}
@@ -272,7 +272,7 @@ func Vec4Random(out []float64, scale float64) []float64 {
 		v3 = rand.Float64()*2 - 1
 		v4 = rand.Float64()*2 - 1
 		s2 = v3*v3 + v4*v4
-		if s2 >= 1 {
+		if s2 < 1 {
 			break
 		}
 	}
@@ -365,7 +365,7 @@ var Vec4SqrDist = Vec4SquaredDistance
 var Vec4SqrLen = Vec4SquaredLength
 
 // Vec4ForEach perform some operation over an array of  Vec4s.
-func Vec4ForEach(a []float64, stride, offset, count int, fn func([]float64, []float64, []interface{}), arg []interface{}) []float64 {
+func Vec4ForEach(a []float64, stride, offset, count int, fn func([]float64, []float64, []float64), arg []float64) []float64 {
 	if stride <= 0 {
 		stride = 4
 	}
