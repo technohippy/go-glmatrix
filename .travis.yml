@@ -10,11 +10,11 @@ install:
 
 script:
 - go vet $(go list ./... | grep -v /vendor/)
-- go test -cover -coverpkg github.com/smith-30/go-ffprobe -coverprofile go-ffprobe.coverprofile
+- go test -cover -coverpkg github.com/technohippy/go-glmatrix -coverprofile go-glmatrix.coverprofile
 
 after_script:
 - gover
-- goveralls -coverprofile=gover.coverprofile -repotoken $COVERALLS_TOKEN
+- goveralls -coverprofile=go-glmatrix.coverprofile -repotoken $COVERALLS_TOKEN
 
 env:
   global:
