@@ -39,6 +39,49 @@ var identityq2 = []float64{
 	0, 0, 0, 0,
 }
 
+func TestQuat2RotateByQuatPrepend(t *testing.T) {
+	rotationQuat := Quat2Create()
+	rotationQuat[0] = 2
+	rotationQuat[1] = 5
+	rotationQuat[2] = 2
+	rotationQuat[3] = -10
+	expect := Quat2Multiply(Quat2Create(), rotationQuat, quat2A)
+	actual := Quat2RotateByQuatPrepend(Quat2Create(), Quat2GetReal(Quat2Create(), rotationQuat), quat2A)
+	if !equalsQuat2(actual, expect) {
+		t.Errorf("rotate by quat prepend: %v", actual)
+	}
+}
+
+func TestQuat2RotateByQuatAppend(t *testing.T) {
+	actual := Quat2RotateByQuatAppend(Quat2Create(), quat2A, []float64{2, 5, 2, -10})
+	rotationQuat := Quat2Create()
+	rotationQuat[0] = 2
+	rotationQuat[1] = 5
+	rotationQuat[2] = 2
+	rotationQuat[3] = -10
+	expect := Quat2Multiply(Quat2Create(), quat2A, rotationQuat)
+	if !equalsQuat2(actual, expect) {
+		t.Errorf("rotate by quat append: %v", actual)
+	}
+}
+
+func TestQuat2RotateAroundAxis(t *testing.T) {
+	ax := []float64{1, 4, 2}
+	quat2A := Quat2FromRotationTranslation(Quat2Create(), []float64{1, 2, 3, 4}, []float64{-5, 4, 10})
+	Quat2Normalize(quat2A, quat2A)
+	matrixA := Mat4FromQuat2(Mat4Create(), quat2A)
+	actual := Quat2RotateAroundAxis(Quat2Create(), quat2A, ax, 5)
+	matOut := Mat4Rotate(Mat4Create(), matrixA, 5, ax)
+	var quat2B = []float64{
+		5, 6, 7, 8,
+		9, 8, 6, -4,
+	}
+	expect := Quat2FromMat4(quat2B, matOut)
+	if !equalsQuat2(actual, expect) {
+		t.Errorf("rotate around axis: \n%v \n%v", actual, expect)
+	}
+}
+
 func TestQuat2Create(t *testing.T) {
 	actual := Quat2Create()
 	if !testSlice(actual, identityq2) {
