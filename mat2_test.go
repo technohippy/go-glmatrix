@@ -147,6 +147,30 @@ func TestMat2Rotate(t *testing.T) {
 	}
 }
 
+func TestMat2FromRotation(t *testing.T) {
+	actual := Mat2FromRotation(Mat2Create(), math.Pi/4)
+	s := math.Sin(math.Pi / 4)
+	c := math.Cos(math.Pi / 4)
+	expect := []float64{
+		c, s,
+		-s, c,
+	}
+	if !testSlice(actual, expect) {
+		t.Errorf("from rotation: %v", actual)
+	}
+}
+
+func TestMat2FromScaling(t *testing.T) {
+	actual := Mat2FromScaling(Mat2Create(), []float64{2, 3})
+	expect := []float64{
+		2, 0,
+		0, 3,
+	}
+	if !testSlice(actual, expect) {
+		t.Errorf("from rotation: %v", actual)
+	}
+}
+
 func TestMat2Str(t *testing.T) {
 	actual := Mat2Str(mat2A)
 	expect := "mat2(1, 2, 3, 4)"
