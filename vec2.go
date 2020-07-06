@@ -187,8 +187,8 @@ func Vec2Cross(out, a, b []float64) []float64 {
 
 // Vec2Lerp performs a linear interpolation between two vec2's
 func Vec2Lerp(out, a, b []float64, t float64) []float64 {
-	ax := out[0]
-	ay := out[1]
+	ax := a[0]
+	ay := a[1]
 	out[0] = ax + t*(b[0]-ax)
 	out[1] = ay + t*(b[1]-ay)
 	return out
@@ -310,15 +310,15 @@ var Vec2SqrDist = Vec2SquaredDistance
 var Vec2SqrLen = Vec2SquaredLength
 
 // Vec2ForEach perform some operation over an array of vec2s.
-func Vec2ForEach(a []float64, stride, offset, count int, fn func([]float64, []float64, []interface{}), arg []interface{}) []float64 {
-	if stride < 0 {
+func Vec2ForEach(a []float64, stride, offset, count int, fn func([]float64, []float64, []float64), arg []float64) []float64 {
+	if stride <= 0 {
 		stride = 2
 	}
-	if offset < 0 {
+	if offset <= 0 {
 		offset = 0
 	}
 	var l int
-	if 0 <= count {
+	if 0 < count {
 		l = int(math.Min(float64(count*stride+offset), float64(len(a))))
 	} else {
 		l = len(a)
