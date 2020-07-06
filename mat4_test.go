@@ -78,6 +78,17 @@ func TestMat4Transpose(t *testing.T) {
 	if !testSlice(actual, expect) {
 		t.Errorf("transpose: %v", actual)
 	}
+
+	actual = []float64{
+		1, 0, 0, 0,
+		0, 1, 0, 0,
+		0, 0, 1, 0,
+		1, 2, 3, 1,
+	}
+	Mat4Transpose(actual, actual)
+	if !testSlice(actual, expect) {
+		t.Errorf("transpose: %v", actual)
+	}
 }
 
 func TestMat4Invert(t *testing.T) {

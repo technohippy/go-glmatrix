@@ -96,7 +96,7 @@ func Mat3Identity(out []float64) []float64 {
 // Mat3Transpose transpose the values of a mat3
 func Mat3Transpose(out, a []float64) []float64 {
 	// If we are transposing ourselves we can skip a few steps but have to cache some values
-	if &out == &a {
+	if &(out[0]) == &(a[0]) {
 		a01 := a[1]
 		a02 := a[2]
 		a12 := a[5]
