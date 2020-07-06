@@ -64,6 +64,14 @@ func TestQuat2Invert(t *testing.T) {
 	}
 }
 
+func TestQuat2GetDual(t *testing.T) {
+	actual := Quat2GetDual(Quat2Create(), quat2A)
+	expect := []float64{2, 5, 6, -2, 0, 0, 0, 0}
+	if !testSlice(actual, expect) {
+		t.Errorf("get dual: %v", actual)
+	}
+}
+
 func TestQuat2SetReal(t *testing.T) {
 	quat2A := []float64{
 		1, 2, 3, 4,
@@ -75,6 +83,7 @@ func TestQuat2SetReal(t *testing.T) {
 		t.Errorf("set real: %v", actual)
 	}
 }
+
 func TestQuat2SetDual(t *testing.T) {
 	quat2A := []float64{
 		1, 2, 3, 4,
@@ -193,6 +202,14 @@ func TestQuat2RotateZ(t *testing.T) {
 	}
 }
 */
+
+func TestQuat2FromRotation(t *testing.T) {
+	actual := Quat2FromRotation(Quat2Create(), []float64{1, 2, 3, 4})
+	expect := []float64{1, 2, 3, 4, 0, 0, 0, 0}
+	if !testSlice(actual, expect) {
+		t.Errorf("from rotation: %v", actual)
+	}
+}
 
 func TestQuat2FromRotationTranslationValues(t *testing.T) {
 	actual := Quat2FromRotationTranslationValues(1, 2, 3, 4, 1, 2, 3)
