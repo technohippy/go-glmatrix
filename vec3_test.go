@@ -18,6 +18,26 @@ func TestVec3RotateX(t *testing.T) {
 	}
 }
 
+func TestVec3RotateY(t *testing.T) {
+	actual := Vec3Create()
+	vec3A := []float64{1, 0, 0}
+	vec3B := []float64{0, 0, 0}
+	Vec3RotateY(actual, vec3A, vec3B, math.Pi)
+	if !testSlice(actual, []float64{0, 0, -1}) {
+		t.Errorf("rotateY: %v", actual)
+	}
+}
+
+func TestVec3RotateZ(t *testing.T) {
+	actual := Vec3Create()
+	vec3A := []float64{1, 0, 0}
+	vec3B := []float64{0, 0, 0}
+	Vec3RotateZ(actual, vec3A, vec3B, math.Pi)
+	if !testSlice(actual, []float64{-1, 0, 0}) {
+		t.Errorf("rotateZ: %v", actual)
+	}
+}
+
 func TestVec3TransformMat4(t *testing.T) {
 	matr := Mat4LookAt(Mat4Create(), []float64{5, 6, 7}, []float64{2, 6, 7}, []float64{0, 1, 0})
 	vec3A := []float64{1, 2, 3}
