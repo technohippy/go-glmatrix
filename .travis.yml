@@ -7,14 +7,12 @@ install:
 - go get golang.org/x/tools/cmd/cover
 - go get github.com/modocache/gover
 - go get github.com/mattn/goveralls
-- go get honnef.co/go/tools/cmd/gosimple
 - go get honnef.co/go/tools/cmd/unused
 - go get honnef.co/go/tools/cmd/staticcheck
 
 script:
 - go vet $(go list ./... | grep -v /vendor/)
 - unused $(go list ./... | grep -v /vendor/)
-- gosimple $(go list ./... | grep -v /vendor/)
 - staticcheck $(go list ./... | grep -v /vendor/)
 - go test -cover -coverpkg github.com/smith-30/go-ffprobe -coverprofile go-ffprobe.coverprofile
 
