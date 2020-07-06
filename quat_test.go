@@ -56,6 +56,14 @@ func TestQuatRotateZ(t *testing.T) {
 	}
 }
 
+func TestQuatCalculateW(t *testing.T) {
+	actual := QuatCalculateW(QuatCreate(), []float64{1, 2, 3, 4})
+	expect := []float64{1, 2, 3, 3.60555}
+	if !testSlice(actual, expect) {
+		t.Errorf("calculate: %v", actual)
+	}
+}
+
 func TestQuatFromMat3(t *testing.T) {
 	matr := []float64{
 		1, 0, 0,
