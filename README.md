@@ -1,3 +1,4 @@
+[![Mentioned in Awesome Go](https://awesome.re/mentioned-badge.svg)](https://github.com/avelino/awesome-go)  
 [![Build Status](https://secure.travis-ci.org/technohippy/go-glmatrix.png?branch=master)](http://travis-ci.org/technohippy/go-glmatrix)
 [![Coverage Status](https://coveralls.io/repos/technohippy/go-glmatrix/badge.svg?branch=master)](https://coveralls.io/r/technohippy/go-glmatrix?branch=master)
 [![Go Report Card](https://goreportcard.com/badge/github.com/technohippy/go-glmatrix)](https://goreportcard.com/report/github.com/technohippy/go-glmatrix)
