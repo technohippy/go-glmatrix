@@ -6,6 +6,30 @@ import (
 	"math/rand"
 )
 
+//AxisOrder is an axis order
+type AxisOrder string
+
+const (
+	// XYZ is axis order
+	XYZ AxisOrder = "xyz"
+
+	// XZY is axis order
+	XZY AxisOrder = "xzy"
+
+	// YXZ is axis order
+	YXZ AxisOrder = "yxz"
+
+	// YZX is axis order
+	YZX AxisOrder = "yzx"
+
+	// ZXY is axis order
+	ZXY AxisOrder = "zxy"
+
+	// ZYX is axis order
+	ZYX AxisOrder = "zyx"
+)
+
+
 // NewQuat creates a new identity quat
 func NewQuat() []float64 {
 	return []float64{0., 0., 0., 1.}
@@ -313,7 +337,12 @@ func QuatFromMat3(out, m []float64) []float64 {
 
 // QuatFromEuler creates a quaternion from the given euler angle x, y, z.
 func QuatFromEuler(out []float64, x, y, z float64) []float64 {
-	halfToRad := (0.5 * math.Pi) / 180.
+	return QuatFromEulerWithOrder(out, x, y, z, XYZ)
+}
+
+// QuatFromEuler creates a quaternion from the given euler angle x, y, z and order
+func QuatFromEulerWithOrder(out []float64, x, y, z float64, order AxisOrder) []float64 {
+	halfToRad := math.Pi / 360.
 	x *= halfToRad
 	y *= halfToRad
 	z *= halfToRad
@@ -323,10 +352,54 @@ func QuatFromEuler(out []float64, x, y, z float64) []float64 {
 	cy := math.Cos(y)
 	sz := math.Sin(z)
 	cz := math.Cos(z)
-	out[0] = sx*cy*cz - cx*sy*sz
-	out[1] = cx*sy*cz - sx*cy*sz
-	out[2] = cx*cy*sz - sx*sy*cz
-	out[3] = cx*cy*cz - sx*sy*sz
+
+	switch order {
+	case XYZ:
+		out[0] = sx*cy*cz + cx*sy*sz
+		out[1] = cx*sy*cz - sx*cy*sz
+		out[2] = cx*cy*sz + sx*sy*cz
+		out[3] = cx*cy*cz - sx*sy*sz
+		break
+
+	case XZY:
+		out[0] = sx*cy*cz - cx*sy*sz
+		out[1] = cx*sy*cz - sx*cy*sz
+		out[2] = cx*cy*sz + sx*sy*cz
+		out[3] = cx*cy*cz + sx*sy*sz
+		break
+
+	case YXZ:
+		out[0] = sx*cy*cz + cx*sy*sz
+		out[1] = cx*sy*cz - sx*cy*sz
+		out[2] = cx*cy*sz - sx*sy*cz
+		out[3] = cx*cy*cz + sx*sy*sz
+		break
+
+	case YZX:
+		out[0] = sx*cy*cz + cx*sy*sz
+		out[1] = cx*sy*cz + sx*cy*sz
+		out[2] = cx*cy*sz - sx*sy*cz
+		out[3] = cx*cy*cz - sx*sy*sz
+		break
+
+	case ZXY:
+		out[0] = sx*cy*cz - cx*sy*sz
+		out[1] = cx*sy*cz + sx*cy*sz
+		out[2] = cx*cy*sz + sx*sy*cz
+		out[3] = cx*cy*cz - sx*sy*sz
+		break
+
+	case ZYX:
+		out[0] = sx*cy*cz - cx*sy*sz
+		out[1] = cx*sy*cz + sx*cy*sz
+		out[2] = cx*cy*sz - sx*sy*cz
+		out[3] = cx*cy*cz + sx*sy*sz
+		break
+
+	default:
+		panic(fmt.Sprintf("Unknown angle order %v", order))
+	}
+
 	return out
 }
 
